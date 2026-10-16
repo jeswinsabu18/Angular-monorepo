@@ -8,7 +8,9 @@
 
       @for (step of steps; track step.title; let i = $index) {
         <section class="help-step">
-          <h2><span class="step-no">{{ i + 1 }}</span> {{ step.title }}</h2>
+          <h2>
+            <span class="step-no">{{ i + 1 }}</span> {{ step.title }}
+          </h2>
 
           <div class="help-step-content">
             <img class="help-shot" [src]="step.image" [alt]="step.alt" loading="lazy" />

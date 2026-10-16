@@ -82,6 +82,6 @@
   background: var(--primary-hover);
 }
 .cancel-button:hover {
-   background: var(--primary-hover);
-   color: var(--white);
+  background: var(--primary-hover);
+  color: var(--white);
 }

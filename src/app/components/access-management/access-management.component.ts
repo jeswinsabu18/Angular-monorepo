@@ -1,12 +1,7 @@
-
 import { Component, inject } from '@angular/core';
-import {
-  AuthService,
-  RegisteredUser,
-  UserPermissions,
-} from '../../services/auth.service';
-import { PageShellComponent} from '../page-shell/page-shell.component';
-import { CustomCheckboxComponent} from '../ui-components/custom-checkbox/custom-checkbox.component';
+import { AuthService, RegisteredUser, UserPermissions } from '../../services/auth.service';
+import { PageShellComponent } from '../page-shell/page-shell.component';
+import { CustomCheckboxComponent } from '../ui-components/custom-checkbox/custom-checkbox.component';
 
 @Component({
   selector: 'app-access-management',
@@ -18,15 +13,11 @@ import { CustomCheckboxComponent} from '../ui-components/custom-checkbox/custom-
 export class AccessManagementComponent {
   private readonly authService = inject(AuthService);
 
-  public users: RegisteredUser[] =
-    this.authService.getUsersForAccessManagement();
+  public users: RegisteredUser[] = this.authService.getUsersForAccessManagement();
 
   public savedMessage = '';
 
-  public permissionValue(
-    user: RegisteredUser,
-    permission: keyof UserPermissions,
-  ): boolean {
+  public permissionValue(user: RegisteredUser, permission: keyof UserPermissions): boolean {
     return user.permissions?.[permission] === true;
   }
 
@@ -43,10 +34,7 @@ export class AccessManagementComponent {
 
     permissions[permission] = checked;
 
-    const saved = this.authService.updateUserPermissions(
-      user.username,
-      permissions,
-    );
+    const saved = this.authService.updateUserPermissions(user.username, permissions);
 
     if (!saved) {
       this.savedMessage = 'Unable to update permissions.';

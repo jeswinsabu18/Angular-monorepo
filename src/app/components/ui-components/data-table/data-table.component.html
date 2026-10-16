@@ -1,0 +1,101 @@
+
+<div
+  class="table-scroll"
+  role="region"
+  [attr.aria-label]="ariaLabel"
+  tabindex="0"
+>
+  <table class="data-table">
+    <thead>
+      <tr>
+        @for (column of columns; track column.key) {
+          <th scope="col">
+            @if (column.sortable) {
+              <button
+                type="button"
+                class="sort-button"
+                (click)="requestSort(column)"
+                [attr.aria-label]="'Sort by ' + column.label"
+              >
+                {{ column.label }}
+
+                <span aria-hidden="true">
+                  {{
+                    sortField === column.key
+                      ? (sortDirection === 'asc' ? '▲' : '▼')
+                      : '↕'
+                  }}
+                </span>
+              </button>
+            } @else {
+              {{ column.label }}
+            }
+          </th>
+        }
+
+        @if (canEdit || canDelete) {
+          <th scope="col">Actions</th>
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (row of rows; track getRowKey(row)) {
+        <tr>
+          @for (column of columns; track column.key) {
+            <td>{{ getCellValue(row, column.key) }}</td>
+          }
+
+          @if (canEdit || canDelete) {
+            <td class="actions-cell">
+              @if (canEdit) {
+                <button
+                  class="edit-button"
+                  type="button"
+                  aria-label="Edit row"
+                  title="Edit"
+                  (click)="editRow.emit(row)"
+                >
+                  <svg
+                    class="action-icon"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <use href="assets/icons.svg#edit"></use>
+                  </svg>
+                </button>
+              }
+
+              @if (canDelete) {
+                <button
+                  class="delete-button"
+                  type="button"
+                  aria-label="Delete row"
+                  title="Delete"
+                  (click)="deleteRow.emit(row)"
+                >
+                  <svg
+                    class="action-icon"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <use href="assets/icons.svg#delete"></use>
+                  </svg>
+                </button>
+              }
+            </td>
+          }
+        </tr>
+      } @empty {
+        <tr>
+          <td
+            class="empty-cell"
+            [attr.colspan]="columns.length + (canEdit || canDelete ? 1 : 0)"
+          >
+            No records found.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

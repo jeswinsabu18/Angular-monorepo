@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
 import { EmployeeFormModalComponent } from '../ui-components/employee-form-modal/employee-form-modal.component';
-import { EmployeeTableComponent } from '../employee-table/employee-table.component';
+import { DataTableComponent } from '../ui-components/data-table/data-table.component';
 import { PageShellComponent } from '../page-shell/page-shell.component';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 import { EmployeeFormValue } from '../../models/employee-form.model';
 import { Employee } from '../../models/employee.model';
+import { TableColumn } from '../../models/table-column.model';
 import { AuthService } from '../../services/auth.service';
 import { EmployeeService } from '../../services/employee.service';
 
@@ -17,7 +18,7 @@ import { EmployeeService } from '../../services/employee.service';
   selector: 'app-employee-component',
   standalone: true,
   imports: [
-    EmployeeTableComponent,
+    DataTableComponent,
     EmployeeFormModalComponent,
     DeleteConfirmationModalComponent,
     ToolbarComponent,
@@ -30,12 +31,24 @@ export class EmployeeComponent {
   public title = 'Employee Management System';
 
   private readonly employeeService = inject(EmployeeService);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
+  public readonly employeeColumns: TableColumn[] = [
+    { key: 'employeeId', label: 'ID', sortable: true },
+    { key: 'employeeName', label: 'Name', sortable: true },
+    { key: 'employeeAge', label: 'Age', sortable: true },
+    { key: 'employeeDepartment', label: 'Department' },
+    { key: 'employeeRole', label: 'Role' },
+  ];
 
   public readonly searchTerm = signal('');
 
   public readonly sortDirection = signal<'asc' | 'desc'>('asc');
 
-  public readonly sortField = signal<'employeeId' | 'employeeAge'>('employeeId');
+  public readonly sortField = signal<'employeeId' | 'employeeAge'>(
+    'employeeId',
+  );
 
   public readonly employees = computed(() => {
     const query = this.searchTerm().trim().toLowerCase();
@@ -70,13 +83,9 @@ export class EmployeeComponent {
   });
 
   public isModalOpen = false;
-
   public isDeleteModalOpen = false;
-
   public isEditing = false;
-
   public editingEmployeeId: number | null = null;
-
   public employeeToDeleteId: number | null = null;
 
   public form: EmployeeFormValue = {
@@ -86,9 +95,6 @@ export class EmployeeComponent {
     employeeDepartment: '',
     employeeRole: '',
   };
-
-  private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
 
   public get canAdd(): boolean {
     return this.authService.hasPermission('add');
@@ -116,14 +122,29 @@ export class EmployeeComponent {
     this.router.navigate(['/login']);
   }
 
-  public sortBy(field: 'employeeId' | 'employeeAge'): void {
+  public sortBy(field: string): void {
+    if (field !== 'employeeId' && field !== 'employeeAge') {
+      return;
+    }
+
     if (this.sortField() === field) {
-      this.sortDirection.update((direction) => (direction === 'asc' ? 'desc' : 'asc'));
+      this.sortDirection.update((direction) =>
+        direction === 'asc' ? 'desc' : 'asc',
+      );
       return;
     }
 
     this.sortField.set(field);
     this.sortDirection.set('asc');
+  }
+
+  public onEditRow(row: object): void {
+    this.openEditModal(row as Employee);
+  }
+
+  public onDeleteRow(row: object): void {
+    const employee = row as Employee;
+    this.openDeleteModal(employee.employeeId);
   }
 
   public openAddModal(): void {

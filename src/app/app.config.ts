@@ -1,4 +1,3 @@
-
 import { provideHttpClient } from '@angular/common/http';
 
 import {
@@ -63,10 +62,7 @@ import {
   VisualMapComponent,
 } from 'echarts/components';
 
-import {
-  LabelLayout,
-  UniversalTransition,
-} from 'echarts/features';
+import { LabelLayout, UniversalTransition } from 'echarts/features';
 
 import { CanvasRenderer } from 'echarts/renderers';
 

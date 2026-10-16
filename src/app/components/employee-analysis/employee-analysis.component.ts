@@ -1,4 +1,3 @@
-
 import { Component, computed, inject } from '@angular/core';
 import type { EChartsCoreOption } from 'echarts/core';
 
@@ -34,22 +33,16 @@ export class EmployeeAnalysisComponent {
   }
 
   private getCssVariable(variableName: string): string {
-    return getComputedStyle(document.documentElement)
-      .getPropertyValue(variableName)
-      .trim();
+    return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
   }
 
   public readonly departmentCounts = computed(() => {
     const counts = new Map<string, number>();
 
     for (const employee of this.employeeService.employees()) {
-      const department =
-        employee.employeeDepartment?.trim() || 'Unassigned';
+      const department = employee.employeeDepartment?.trim() || 'Unassigned';
 
-      counts.set(
-        department,
-        (counts.get(department) ?? 0) + 1,
-      );
+      counts.set(department, (counts.get(department) ?? 0) + 1);
     }
 
     return Array.from(counts.entries())
@@ -89,9 +82,7 @@ export class EmployeeAnalysisComponent {
     return groups.filter((group) => group.count > 0);
   });
 
-  public readonly totalEmployees = computed(
-    () => this.employeeService.employees().length,
-  );
+  public readonly totalEmployees = computed(() => this.employeeService.employees().length);
 
   public readonly chartOptions = computed<EChartsCoreOption>(() => {
     // Make the chart react to theme changes.
@@ -185,13 +176,7 @@ export class EmployeeAnalysisComponent {
     const colors = this.chartColors;
 
     return {
-      color: [
-        colors.primary,
-        '#6366f1',
-        '#f59e0b',
-        '#ec4899',
-        '#64748b',
-      ],
+      color: [colors.primary, '#6366f1', '#f59e0b', '#ec4899', '#64748b'],
       title: {
         text: 'Employees by Age Group',
         left: 'center',

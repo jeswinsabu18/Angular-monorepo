@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import type { EChartsCoreOption } from 'echarts/core';
 import { NgxEchartsDirective } from 'ngx-echarts';

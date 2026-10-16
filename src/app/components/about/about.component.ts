@@ -37,8 +37,7 @@ export class AboutComponent {
     {
       icon: 'table',
       title: 'Table and list views',
-      description:
-        'Browse employees as a sortable table or as a list with a details panel.',
+      description: 'Browse employees as a sortable table or as a list with a details panel.',
     },
     {
       icon: 'search',
@@ -49,8 +48,7 @@ export class AboutComponent {
     {
       icon: 'edit',
       title: 'Add, edit and delete',
-      description:
-        'Validated forms and a delete confirmation help keep employee records accurate.',
+      description: 'Validated forms and a delete confirmation help keep employee records accurate.',
     },
     {
       icon: 'profile',
@@ -61,14 +59,12 @@ export class AboutComponent {
     {
       icon: 'settings',
       title: 'Permission-based access',
-      description:
-        'Administrators grant Add, Edit and Delete rights to each user independently.',
+      description: 'Administrators grant Add, Edit and Delete rights to each user independently.',
     },
     {
       icon: 'moon',
       title: 'Light and dark themes',
-      description:
-        'Switch themes from the header; your preference is remembered.',
+      description: 'Switch themes from the header; your preference is remembered.',
     },
   ];
 

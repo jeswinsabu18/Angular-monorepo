@@ -1,4 +1,3 @@
-
 import { Routes } from '@angular/router';
 
 import { LoginComponent } from './components/login/login.component';
@@ -55,8 +54,9 @@ export const routes: Routes = [
       {
         path: 'analytics',
         loadComponent: () =>
-          import('./components/employee-analysis/employee-analysis.component')
-            .then((m) => m.EmployeeAnalysisComponent),
+          import('./components/employee-analysis/employee-analysis.component').then(
+            (m) => m.EmployeeAnalysisComponent,
+          ),
       },
       {
         path: 'help',
@@ -70,8 +70,9 @@ export const routes: Routes = [
         path: 'access-management',
         canActivate: [adminGuard],
         loadComponent: () =>
-          import('./components/access-management/access-management.component')
-            .then((m) => m.AccessManagementComponent),
+          import('./components/access-management/access-management.component').then(
+            (m) => m.AccessManagementComponent,
+          ),
       },
     ],
   },

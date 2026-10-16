@@ -1,12 +1,9 @@
-
 <app-page-shell title="Employee Analysis">
   <section class="analytics-page">
     <header class="analytics-header">
       <div>
         <h1>Employee Analysis</h1>
-        <p>
-          Explore employee distribution by department and age group.
-        </p>
+        <p>Explore employee distribution by department and age group.</p>
       </div>
 
       <div class="total-card">
@@ -16,10 +13,7 @@
     </header>
 
     @if (totalEmployees() > 0) {
-      <section
-        class="charts-grid"
-        aria-label="Employee analytics charts"
-      >
+      <section class="charts-grid" aria-label="Employee analytics charts">
         <article class="chart-card">
           <app-custom-chart
             [options]="chartOptions()"
@@ -36,16 +30,12 @@
               ariaLabel="Pie chart showing employee distribution by age group"
             />
           } @else {
-            <p class="empty-state">
-              No valid employee age data is available to display.
-            </p>
+            <p class="empty-state">No valid employee age data is available to display.</p>
           }
         </article>
       </section>
     } @else {
-      <p class="empty-state">
-        No employee data is available to display.
-      </p>
+      <p class="empty-state">No employee data is available to display.</p>
     }
   </section>
 </app-page-shell>

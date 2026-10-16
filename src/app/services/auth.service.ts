@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 
 export type UserPermission = 'add' | 'edit' | 'delete';
@@ -50,10 +49,7 @@ export class AuthService {
 
     if (
       username === this.adminUser.username ||
-      users.some(
-        (existing) =>
-          existing.username.trim().toLowerCase() === username,
-      )
+      users.some((existing) => existing.username.trim().toLowerCase() === username)
     ) {
       return false;
     }
@@ -79,16 +75,12 @@ export class AuthService {
 
     let user: RegisteredUser | undefined;
 
-    if (
-      cleanUsername === this.adminUser.username &&
-      password === this.adminUser.password
-    ) {
+    if (cleanUsername === this.adminUser.username && password === this.adminUser.password) {
       user = this.adminUser;
     } else {
       user = this.getRegisteredUsers().find(
         (candidate) =>
-          candidate.username.toLowerCase() === cleanUsername &&
-          candidate.password === password,
+          candidate.username.toLowerCase() === cleanUsername && candidate.password === password,
       );
     }
 
@@ -97,14 +89,8 @@ export class AuthService {
     }
 
     sessionStorage.setItem(this.loginStorageKey, 'true');
-    sessionStorage.setItem(
-      this.loginTimeStorageKey,
-      Date.now().toString(),
-    );
-    sessionStorage.setItem(
-      this.loggedInUsernameStorageKey,
-      user.username,
-    );
+    sessionStorage.setItem(this.loginTimeStorageKey, Date.now().toString());
+    sessionStorage.setItem(this.loggedInUsernameStorageKey, user.username);
 
     return true;
   }
@@ -116,9 +102,7 @@ export class AuthService {
   public isAuthenticated(): boolean {
     const loggedIn = sessionStorage.getItem(this.loginStorageKey);
     const loginTime = sessionStorage.getItem(this.loginTimeStorageKey);
-    const username = sessionStorage.getItem(
-      this.loggedInUsernameStorageKey,
-    );
+    const username = sessionStorage.getItem(this.loggedInUsernameStorageKey);
 
     if (loggedIn !== 'true' || !loginTime || !username) {
       this.clearSession();
@@ -138,9 +122,7 @@ export class AuthService {
 
     const userExists =
       username.toLowerCase() === this.adminUser.username ||
-      this.getRegisteredUsers().some(
-        (user) => user.username === username,
-      );
+      this.getRegisteredUsers().some((user) => user.username === username);
 
     if (!userExists) {
       this.clearSession();
@@ -155,9 +137,7 @@ export class AuthService {
       return null;
     }
 
-    const username = sessionStorage.getItem(
-      this.loggedInUsernameStorageKey,
-    );
+    const username = sessionStorage.getItem(this.loggedInUsernameStorageKey);
 
     if (!username) {
       return null;
@@ -167,11 +147,7 @@ export class AuthService {
       return { ...this.adminUser };
     }
 
-    return (
-      this.getRegisteredUsers().find(
-        (user) => user.username === username,
-      ) ?? null
-    );
+    return this.getRegisteredUsers().find((user) => user.username === username) ?? null;
   }
 
   public isAdmin(): boolean {
@@ -181,10 +157,7 @@ export class AuthService {
   public hasPermission(permission: UserPermission): boolean {
     const user = this.getLoggedInUser();
 
-    return (
-      user?.role === 'admin' ||
-      user?.permissions?.[permission] === true
-    );
+    return user?.role === 'admin' || user?.permissions?.[permission] === true;
   }
 
   public getUsersForAccessManagement(): RegisteredUser[] {
@@ -196,18 +169,13 @@ export class AuthService {
     }));
   }
 
-  public updateUserPermissions(
-    username: string,
-    permissions: UserPermissions,
-  ): boolean {
+  public updateUserPermissions(username: string, permissions: UserPermissions): boolean {
     if (!this.isAdmin()) {
       return false;
     }
 
     const users = this.getRegisteredUsers();
-    const index = users.findIndex(
-      (user) => user.username === username,
-    );
+    const index = users.findIndex((user) => user.username === username);
 
     if (index === -1) {
       return false;
@@ -227,9 +195,7 @@ export class AuthService {
     this.clearSession();
   }
 
-  private normalizePermissions(
-    permissions?: Partial<UserPermissions>,
-  ): UserPermissions {
+  private normalizePermissions(permissions?: Partial<UserPermissions>): UserPermissions {
     return {
       add: permissions?.add === true,
       edit: permissions?.edit === true,
@@ -268,9 +234,6 @@ export class AuthService {
   }
 
   private saveRegisteredUsers(users: RegisteredUser[]): void {
-    localStorage.setItem(
-      this.usersStorageKey,
-      JSON.stringify(users),
-    );
+    localStorage.setItem(this.usersStorageKey, JSON.stringify(users));
   }
 }

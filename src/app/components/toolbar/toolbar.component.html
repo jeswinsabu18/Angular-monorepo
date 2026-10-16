@@ -1,4 +1,3 @@
-
 <div class="toolbar">
   <div class="search-container">
     <app-custom-input
@@ -23,11 +22,7 @@
   </div>
 
   @if (canAdd) {
-    <button
-      class="primary-button"
-      type="button"
-      (click)="addEmployee.emit()"
-    >
+    <button class="primary-button" type="button" (click)="addEmployee.emit()">
       + Add Employee
     </button>
   }

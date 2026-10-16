@@ -1,4 +1,3 @@
-
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -40,9 +39,7 @@ export class EmployeeHeaderComponent {
     this.isProfileOpen = false;
   }
 
-  public openSettingsPage(
-    page: 'access-management' | 'help' | 'about',
-  ): void {
+  public openSettingsPage(page: 'access-management' | 'help' | 'about'): void {
     this.isSettingsOpen = false;
 
     if (page === 'access-management' && !this.isAdmin) {

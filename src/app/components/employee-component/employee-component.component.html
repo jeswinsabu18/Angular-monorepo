@@ -8,16 +8,19 @@
     (addEmployee)="openAddModal()"
   ></app-toolbar>
 
-  <app-employee-table
-    [employees]="employees()"
+  <app-data-table
+    [rows]="employees()"
+    [columns]="employeeColumns"
+    [rowKey]="'employeeId'"
     [sortField]="sortField()"
     [sortDirection]="sortDirection()"
     [canEdit]="canEdit"
     [canDelete]="canDelete"
+    ariaLabel="Employee records"
     (sortChanged)="sortBy($event)"
-    (editEmployee)="openEditModal($event)"
-    (deleteEmployee)="openDeleteModal($event)"
-  ></app-employee-table>
+    (editRow)="onEditRow($event)"
+    (deleteRow)="onDeleteRow($event)"
+  ></app-data-table>
 
   @if (isModalOpen) {
     <app-employee-form-modal
