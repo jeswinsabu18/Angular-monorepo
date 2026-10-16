@@ -1,3 +1,4 @@
+
 <app-page-shell title="Employee Analysis">
   <section class="analytics-page">
     <header class="analytics-header">
@@ -20,17 +21,11 @@
         aria-label="Employee analytics charts"
       >
         <article class="chart-card">
-          @if (departmentCounts().length > 0) {
-            <app-custom-chart
-              [options]="chartOptions()"
-              [height]="'340px'"
-              ariaLabel="Bar chart showing employee counts by department"
-            />
-          } @else {
-            <p class="empty-state">
-              No department data is available to display.
-            </p>
-          }
+          <app-custom-chart
+            [options]="chartOptions()"
+            [height]="'340px'"
+            ariaLabel="Bar chart showing employee counts by department"
+          />
         </article>
 
         <article class="chart-card">

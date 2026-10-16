@@ -1,3 +1,4 @@
+
 import { Component, computed, inject } from '@angular/core';
 import type { EChartsCoreOption } from 'echarts/core';
 
@@ -22,12 +23,33 @@ export class EmployeeAnalysisComponent {
   private readonly employeeService = inject(EmployeeService);
   private readonly themeService = inject(ThemeService);
 
+  private get chartColors() {
+    return {
+      primary: this.getCssVariable('--primary'),
+      text: this.getCssVariable('--text-primary'),
+      secondaryText: this.getCssVariable('--text-secondary'),
+      border: this.getCssVariable('--border-primary'),
+      surface: this.getCssVariable('--bg-secondary'),
+    };
+  }
+
+  private getCssVariable(variableName: string): string {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue(variableName)
+      .trim();
+  }
+
   public readonly departmentCounts = computed(() => {
     const counts = new Map<string, number>();
 
     for (const employee of this.employeeService.employees()) {
-      const department = employee.employeeDepartment?.trim() || 'Unassigned';
-      counts.set(department, (counts.get(department) ?? 0) + 1);
+      const department =
+        employee.employeeDepartment?.trim() || 'Unassigned';
+
+      counts.set(
+        department,
+        (counts.get(department) ?? 0) + 1,
+      );
     }
 
     return Array.from(counts.entries())
@@ -45,7 +67,7 @@ export class EmployeeAnalysisComponent {
     ];
 
     for (const employee of this.employeeService.employees()) {
-      const age = Number(employee.employeeAge);
+      const age = employee.employeeAge;
 
       if (!Number.isFinite(age) || age < 0) {
         continue;
@@ -71,23 +93,10 @@ export class EmployeeAnalysisComponent {
     () => this.employeeService.employees().length,
   );
 
-  private get chartColors() {
-    return this.themeService.isDarkMode()
-      ? {
-          text: '#f1f5f9',
-          secondaryText: '#cbd5e1',
-          border: '#475569',
-          surface: '#1f2937',
-        }
-      : {
-          text: '#334155',
-          secondaryText: '#475569',
-          border: '#cbd5e1',
-          surface: '#ffffff',
-        };
-  }
-
   public readonly chartOptions = computed<EChartsCoreOption>(() => {
+    // Make the chart react to theme changes.
+    this.themeService.isDarkMode();
+
     const departments = this.departmentCounts();
     const colors = this.chartColors;
 
@@ -155,7 +164,7 @@ export class EmployeeAnalysisComponent {
           data: departments.map((item) => item.count),
           barMaxWidth: 36,
           itemStyle: {
-            color: '#007a8c',
+            color: colors.primary,
             borderRadius: [4, 4, 0, 0],
           },
           label: {
@@ -170,11 +179,19 @@ export class EmployeeAnalysisComponent {
   });
 
   public readonly ageChartOptions = computed<EChartsCoreOption>(() => {
+    // Make the chart react to theme changes.
+    this.themeService.isDarkMode();
+
     const colors = this.chartColors;
-    const ageGroups = this.ageGroupCounts();
 
     return {
-      color: ['#007a8c', '#6366f1', '#f59e0b', '#ec4899', '#64748b'],
+      color: [
+        colors.primary,
+        '#6366f1',
+        '#f59e0b',
+        '#ec4899',
+        '#64748b',
+      ],
       title: {
         text: 'Employees by Age Group',
         left: 'center',
@@ -205,13 +222,12 @@ export class EmployeeAnalysisComponent {
         {
           name: 'Age group',
           type: 'pie',
-          radius: ['0%', '62%'],
-          center: ['50%', '49%'],
+          radius: '62%',
+          center: ['50%', '48%'],
           avoidLabelOverlap: true,
           itemStyle: {
             borderColor: colors.surface,
             borderWidth: 2,
-            borderRadius: 4,
           },
           label: {
             show: true,
@@ -227,12 +243,8 @@ export class EmployeeAnalysisComponent {
           emphasis: {
             scale: true,
             scaleSize: 6,
-            itemStyle: {
-              shadowBlur: 10,
-              shadowColor: 'rgba(0, 0, 0, 0.2)',
-            },
           },
-          data: ageGroups.map((group) => ({
+          data: this.ageGroupCounts().map((group) => ({
             name: group.label,
             value: group.count,
           })),
