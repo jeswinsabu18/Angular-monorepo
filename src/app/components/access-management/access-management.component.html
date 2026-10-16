@@ -1,0 +1,74 @@
+
+<app-page-shell>
+  <div class="access-scroll">
+    <section class="access-page">
+      <header class="access-header">
+        <div>
+          <h1>Access Management</h1>
+          <p>Choose which employee actions each registered user can perform.</p>
+        </div>
+
+        <span class="user-count">{{ users.length }} users</span>
+      </header>
+
+      @if (savedMessage) {
+        <p class="saved-message" role="status">
+          {{ savedMessage }}
+        </p>
+      }
+
+      @if (users.length === 0) {
+        <div class="empty-state">
+          No registered users yet. Users who sign up will appear here.
+        </div>
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Username</th>
+                <th>Add</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (user of users; track user.username) {
+                <tr>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.username }}</td>
+
+                  <td>
+                    <app-custom-checkbox
+                      [checked]="permissionValue(user, 'add')"
+                      [ariaLabel]="'Add access for ' + user.username"
+                      (checkedChange)="setPermission(user, 'add', $event)"
+                    />
+                  </td>
+
+                  <td>
+                    <app-custom-checkbox
+                      [checked]="permissionValue(user, 'edit')"
+                      [ariaLabel]="'Edit access for ' + user.username"
+                      (checkedChange)="setPermission(user, 'edit', $event)"
+                    />
+                  </td>
+
+                  <td>
+                    <app-custom-checkbox
+                      [checked]="permissionValue(user, 'delete')"
+                      [ariaLabel]="'Delete access for ' + user.username"
+                      (checkedChange)="setPermission(user, 'delete', $event)"
+                    />
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+  </div>
+</app-page-shell>

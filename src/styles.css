@@ -1,0 +1,177 @@
+/* =========================================================
+   THEME VARIABLES
+   Light is the default. ThemeService sets
+   <html data-theme="light|dark">.
+========================================================= */
+
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  /* Backgrounds */
+  --bg-primary: #f5f7fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f8fafc;
+  --bg-hover: #f1f5f9;
+  --bg-active: #e8f1fb;
+  --bg-soft-hover: #f0f8f9;
+
+  /* Text */
+  --text-primary: #334155;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --placeholder: #7a8794;
+
+  /* Borders */
+  --border-primary: #e2e8f0;
+  --border-secondary: #cbd5e1;
+  --border-teal: #d5e5e8;
+
+  /* Brand (teal) */
+  --primary: #007a8c;
+  --primary-hover: #006675;
+  --primary-light: #e8f5f7;
+  --primary-border: #c9e4e8;
+  --primary-border-light: #b9d5da;
+  --primary-muted: #5f8990;
+  --primary-disabled: #8db9c0;
+  --primary-ring: rgba(0, 122, 140, 0.12);
+
+  /* Shadows / overlay */
+  --card-shadow: 0 18px 40px rgba(71, 85, 105, 0.12);
+  --card-shadow-soft: 0 8px 25px rgba(71, 85, 105, 0.08);
+  --popup-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
+  --modal-shadow: 0 20px 50px rgba(71, 85, 105, 0.15);
+  --overlay: rgba(71, 85, 105, 0.28);
+
+  /* Danger */
+  --danger: #ef4444;
+  --danger-strong: #b91c1c;
+  --danger-light: #fef2f2;
+  --danger-border: #fecaca;
+
+  /* Disabled buttons */
+  --disabled-bg: #d3d3d3;
+  --disabled-text: #888888;
+
+  /* Constant white (text on teal buttons) */
+  --white: #ffffff;
+
+  /* Login / Signup */
+  --auth-bg: #edf3f1;
+  --auth-text: #1f2937;
+  --auth-input-border: #b9c9c3;
+  --auth-input-hover: #8fa89f;
+  --auth-card-border: #dce7e2;
+  --auth-divider: #e3ebe8;
+  --auth-shadow: 0 14px 36px rgba(31, 56, 47, 0.1);
+  --auth-panel-start: #007a8c;
+  --auth-panel-end: #004d59;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #273449;
+  --bg-hover: #334155;
+  --bg-active: #164e63;
+  --bg-soft-hover: #2a3b4f;
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --placeholder: #64748b;
+
+  --border-primary: #374151;
+  --border-secondary: #475569;
+  --border-teal: #365e66;
+
+  --primary: #16a3b8;
+  --primary-hover: #0e8496;
+  --primary-light: #123b43;
+  --primary-border: #2c6871;
+  --primary-border-light: #356d75;
+  --primary-muted: #7fb5bf;
+  --primary-disabled: #2c6871;
+  --primary-ring: rgba(22, 163, 184, 0.25);
+
+  --card-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  --card-shadow-soft: 0 8px 25px rgba(0, 0, 0, 0.35);
+  --popup-shadow: 0 15px 35px rgba(0, 0, 0, 0.55);
+  --modal-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --overlay: rgba(0, 0, 0, 0.6);
+
+  --danger: #f87171;
+  --danger-strong: #fca5a5;
+  --danger-light: #3b1d22;
+  --danger-border: #7f1d1d;
+
+  --disabled-bg: #374151;
+  --disabled-text: #6b7280;
+
+  --white: #ffffff;
+
+  --auth-bg: #111827;
+  --auth-text: #f1f5f9;
+  --auth-input-border: #475569;
+  --auth-input-hover: #64748b;
+  --auth-card-border: #374151;
+  --auth-divider: #374151;
+  --auth-shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+  --auth-panel-start: #0e6f7e;
+  --auth-panel-end: #072a32;
+}
+
+/* =========================================================
+   BASE
+========================================================= */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  min-height: 100%;
+
+  box-sizing: border-box;
+
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SUBTLE THEME TRANSITION
+   Low specificity, so components that define their own
+   hover transitions are unaffected.
+========================================================= */
+
+html[data-theme] body,
+html[data-theme] body *,
+html[data-theme] body *::before,
+html[data-theme] body *::after {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] body,
+  html[data-theme] body *,
+  html[data-theme] body *::before,
+  html[data-theme] body *::after {
+    transition: none;
+  }
+}

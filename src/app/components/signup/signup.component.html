@@ -1,0 +1,200 @@
+<div class="signup-page">
+  <div class="signup-card">
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="signup-header">
+      <h1>Employee Management System</h1>
+
+      <h2>Create Account</h2>
+
+      <p>Create your account to continue</p>
+    </div>
+
+    <!-- =========================
+         SIGNUP FORM
+    ========================== -->
+
+    <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="signup()">
+      <!-- =========================
+           NAME
+      ========================== -->
+
+      <div class="form-group">
+        <app-custom-input
+          inputId="name"
+          label="Name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter your name"
+          autocomplete="name"
+        >
+          @if (signupForm.controls.name.touched && signupForm.controls.name.hasError('required')) {
+            <span class="validation-message"> Name is required </span>
+          }
+
+          @if (signupForm.controls.name.touched && signupForm.controls.name.hasError('minlength')) {
+            <span class="validation-message"> Name must contain at least 2 characters </span>
+          }
+        </app-custom-input>
+      </div>
+
+      <!-- =========================
+           USERNAME
+      ========================== -->
+
+      <div class="form-group">
+        <app-custom-input
+          inputId="username"
+          label="Username"
+          type="text"
+          formControlName="username"
+          placeholder="Enter username"
+          autocomplete="username"
+        >
+          @if (
+            signupForm.controls.username.touched &&
+            signupForm.controls.username.hasError('required')
+          ) {
+            <span class="validation-message"> Username is required </span>
+          }
+
+          @if (
+            signupForm.controls.username.touched &&
+            signupForm.controls.username.hasError('minlength')
+          ) {
+            <span class="validation-message"> Username must contain at least 3 characters </span>
+          }
+
+          <!-- Duplicate Username -->
+
+          @if (signupForm.controls.username.hasError('usernameTaken')) {
+            <span class="validation-message"> This username is already taken </span>
+          }
+        </app-custom-input>
+      </div>
+
+      <!-- =========================
+           GENDER
+      ========================== -->
+
+      <div class="form-group">
+        <label for="gender"> Gender </label>
+
+        <select id="gender" formControlName="gender">
+          <option value="" disabled>Select gender</option>
+
+          <option value="Male">Male</option>
+
+          <option value="Female">Female</option>
+
+          <option value="Other">Other</option>
+        </select>
+
+        @if (
+          signupForm.controls.gender.touched && signupForm.controls.gender.hasError('required')
+        ) {
+          <span class="validation-message"> Please select your gender </span>
+        }
+      </div>
+
+      <!-- =========================
+           DATE OF BIRTH
+      ========================== -->
+
+      <div class="form-group">
+        <label for="dob"> Date of Birth </label>
+
+        <input id="dob" type="date" formControlName="dob" [max]="maxDate" />
+
+        @if (signupForm.controls.dob.touched && signupForm.controls.dob.hasError('required')) {
+          <span class="validation-message"> Date of birth is required </span>
+        }
+      </div>
+
+      <!-- =========================
+           PASSWORD
+      ========================== -->
+
+      <div class="form-group">
+        <app-custom-input
+          inputId="password"
+          label="Password"
+          type="password"
+          formControlName="password"
+          placeholder="Enter password"
+          autocomplete="new-password"
+        >
+          @if (
+            signupForm.controls.password.touched &&
+            signupForm.controls.password.hasError('required')
+          ) {
+            <span class="validation-message"> Password is required </span>
+          }
+
+          @if (
+            signupForm.controls.password.touched &&
+            signupForm.controls.password.hasError('minlength')
+          ) {
+            <span class="validation-message"> Password must contain at least 6 characters </span>
+          }
+        </app-custom-input>
+      </div>
+
+      <!-- =========================
+           CONFIRM PASSWORD
+      ========================== -->
+
+      <div class="form-group">
+        <app-custom-input
+          inputId="confirm-password"
+          label="Confirm Password"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Confirm password"
+          autocomplete="new-password"
+        >
+          @if (
+            signupForm.controls.confirmPassword.touched &&
+            signupForm.controls.confirmPassword.hasError('required')
+          ) {
+            <span class="validation-message"> Please confirm your password </span>
+          }
+
+          @if (
+            signupForm.controls.confirmPassword.touched && signupForm.hasError('passwordMismatch')
+          ) {
+            <span class="validation-message"> Passwords do not match </span>
+          }
+        </app-custom-input>
+      </div>
+
+      <!-- =========================
+           ERROR MESSAGE
+      ========================== -->
+
+      @if (errorMessage) {
+        <p class="error-message">
+          {{ errorMessage }}
+        </p>
+      }
+
+      <!-- =========================
+           CREATE ACCOUNT
+      ========================== -->
+
+      <button type="submit" class="signup-button">Create Account</button>
+
+      <!-- =========================
+           LOGIN
+      ========================== -->
+
+      <div class="login-link">
+        <span> Already have an account? </span>
+
+        <button type="button" class="login-link-button" (click)="goToLogin()">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

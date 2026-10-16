@@ -1,0 +1,76 @@
+.toolbar {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  margin-bottom: 10px;
+
+
+  gap: 16px;
+
+  height: 40px;
+}
+
+.search-container {
+  position: relative;
+}
+
+/* Input look comes from app-custom-input; only layout and compact tokens are set here */
+.search-field {
+  width: 280px;
+
+  --custom-input-min-height: 0;
+  --custom-input-padding: 10px 38px 10px 14px;
+  --custom-input-border-width: 1px;
+  --custom-input-radius: 4px;
+  --custom-input-bg: var(--bg-tertiary);
+  --custom-input-font-size: 14px;
+  --custom-input-placeholder: var(--text-light);
+  --custom-input-hover-border-color: var(--border-secondary);
+  --custom-input-focus-ring: none;
+}
+
+.clear-search-button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+
+  transform: translateY(-50%);
+
+  border: 0;
+  padding: 0;
+
+  cursor: pointer;
+
+  color: var(--text-light);
+  font-size: 22px;
+  line-height: 1;
+
+  background: transparent;
+}
+
+.clear-search-button:hover,
+.clear-search-button:focus-visible {
+  color: var(--text-primary);
+}
+
+.primary-button {
+  border: none;
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  color: var(--white);
+
+  font-size: 14px;
+
+  padding: 10px 14px;
+
+  background: var(--primary);
+}
+
+.primary-button:hover {
+  background: var(--primary-hover);
+}

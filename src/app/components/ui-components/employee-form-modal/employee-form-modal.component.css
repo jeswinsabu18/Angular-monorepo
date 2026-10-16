@@ -1,0 +1,160 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: var(--overlay);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1000;
+}
+
+.modal-card {
+  background: var(--bg-secondary);
+
+  width: 420px;
+  max-width: 90%;
+
+  border-radius: 12px;
+
+  padding: 24px 22px;
+
+  box-sizing: border-box;
+
+  box-shadow: var(--modal-shadow);
+}
+
+.modal-card h3 {
+  margin: 0 0 16px;
+
+  color: var(--text-primary);
+
+  font-size: 1.5rem;
+}
+
+.form-field {
+  margin-bottom: 14px;
+}
+
+.form-field label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  color: var(--text-secondary);
+}
+
+.form-field input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  border: 1px solid var(--border-secondary);
+
+  border-radius: 8px;
+
+  font-size: 14px;
+
+  background: var(--bg-tertiary);
+
+  color: var(--text-primary);
+}
+
+.form-field input::placeholder {
+  color: var(--text-light);
+}
+
+.form-field input:focus {
+  outline: none;
+
+  border-color: var(--primary);
+}
+
+/* Text fields use app-custom-input; these tokens keep the modal's compact look */
+.form-field app-custom-input {
+  --custom-input-label-size: 13px;
+  --custom-input-label-weight: 700;
+  --custom-input-label-color: var(--text-secondary);
+
+  --custom-input-min-height: 0;
+  --custom-input-padding: 10px 12px;
+  --custom-input-border-width: 1px;
+  --custom-input-radius: 8px;
+  --custom-input-bg: var(--bg-tertiary);
+  --custom-input-font-size: 14px;
+  --custom-input-placeholder: var(--text-light);
+  --custom-input-hover-border-color: var(--border-secondary);
+  --custom-input-focus-ring: none;
+}
+
+.field-error {
+  display: block;
+
+  margin-top: 6px;
+
+  color: var(--danger);
+
+  font-size: 12px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+/* Cancel and Save buttons */
+.cancel-button,
+.save-button {
+  border: none;
+  border-radius: 8px;
+
+  padding: 10px 16px;
+
+  cursor: pointer;
+
+  color: var(--white);
+}
+
+/* Cancel */
+.cancel-button {
+  background: var(--bg-secondary);
+
+  color: var(--primary);
+
+  border: 1px solid var(--primary);
+}
+
+/* Save */
+.save-button {
+  background: var(--primary);
+}
+
+/* Hover */
+
+.save-button:hover {
+  background: var(--primary-hover);
+}
+
+/* Disabled Save button */
+.save-button:disabled {
+  background-color: var(--disabled-bg);
+
+  color: var(--disabled-text);
+
+  cursor: not-allowed;
+}
+.cancel-button:hover {
+  background: var(--primary-hover);
+  color: white;
+}

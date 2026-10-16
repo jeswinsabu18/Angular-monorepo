@@ -1,0 +1,294 @@
+/* =========================================================
+   LOGIN PAGE  -  split layout (brand panel left, form right)
+========================================================= */
+
+.login-page {
+  --brand: var(--primary);
+  --brand-dark: var(--primary-hover);
+  --brand-deep: var(--auth-panel-end);
+  --brand-soft: var(--primary-ring);
+  --bg: var(--auth-bg);
+  --surface: var(--bg-secondary);
+  --border: var(--auth-input-border);
+  --text: var(--auth-text);
+  --text-muted: var(--text-secondary);
+  --danger: var(--danger-strong);
+  --danger-bg: var(--danger-light);
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+
+  background: var(--bg);
+  font-family:
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    Roboto,
+    Arial,
+    sans-serif;
+}
+
+/* =========================
+   LEFT BRAND PANEL
+========================= */
+
+.login-page::before {
+  content: 'Employee Management\A Manage your team, attendance, leave and payroll from one simple place.';
+  white-space: pre-line;
+
+  display: block;
+  position: sticky;
+  top: 0;
+  align-self: start;
+
+  height: 100vh;
+  height: 100dvh;
+  box-sizing: border-box;
+
+  padding: calc(50dvh - 80px) 48px 40px;
+
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 16px;
+  line-height: 1.6;
+
+  background:
+    radial-gradient(circle at 12% 14%, rgba(255, 255, 255, 0.16) 0, transparent 38%),
+    radial-gradient(circle at 88% 86%, rgba(255, 255, 255, 0.12) 0, transparent 42%),
+    linear-gradient(145deg, var(--auth-panel-start) 0%, var(--auth-panel-end) 100%);
+}
+
+.login-page::before:first-line {
+  color: var(--white);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* =========================
+   LOGIN CARD (right side)
+========================= */
+
+.login-card {
+  grid-column: 2;
+  align-self: center;
+  justify-self: center;
+
+  width: min(100%, 360px);
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  margin: 24px;
+  padding: 26px 24px;
+
+  background: var(--surface);
+  border: 1px solid var(--auth-card-border);
+  border-radius: 10px;
+
+  box-shadow: var(--auth-shadow);
+}
+
+/* =========================
+   HEADING
+========================= */
+
+.login-card h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.login-card h2 {
+  margin: 6px 0 20px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--brand);
+}
+
+/* =========================
+   FORM
+========================= */
+
+.login-form {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+/* Input look comes from app-custom-input; only the auth page tokens are set here */
+.form-group app-custom-input {
+  --custom-input-label-color: var(--text);
+  --custom-input-color: var(--text);
+  --custom-input-border-color: var(--border);
+  --custom-input-hover-border-color: var(--auth-input-hover);
+}
+
+/* =========================
+   VALIDATION
+========================= */
+
+.validation-message {
+  display: block;
+  margin-top: 5px;
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message {
+  margin: 4px 0 14px;
+  padding: 9px 12px;
+
+  border: 1px solid var(--danger-border);
+  border-radius: 6px;
+
+  background: var(--danger-bg);
+  color: var(--danger);
+
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.login-button {
+  width: 100%;
+  min-height: 44px;
+
+  margin-top: 4px;
+  padding: 10px 14px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: var(--brand);
+  color: var(--white);
+
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.login-button:hover {
+  background: var(--brand-dark);
+}
+
+.login-button:focus-visible {
+  outline: 3px solid rgba(0, 122, 140, 0.35);
+  outline-offset: 3px;
+}
+
+.login-button:disabled {
+  background: var(--primary-disabled);
+  cursor: not-allowed;
+}
+
+/* =========================
+   CREATE ACCOUNT
+========================= */
+
+.create-account {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  margin-top: 18px;
+  padding-top: 16px;
+
+  border-top: 1px solid var(--auth-divider);
+
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.create-account-button {
+  padding: 4px;
+  border: none;
+  background: transparent;
+
+  color: var(--brand);
+
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+
+  cursor: pointer;
+}
+
+.create-account-button:hover {
+  color: var(--brand-dark);
+  text-decoration: underline;
+}
+
+.create-account-button:focus-visible {
+  outline: 3px solid rgba(0, 122, 140, 0.4);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* =========================
+   TABLET & MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    align-content: start;
+  }
+
+  .login-page::before {
+    position: static;
+    height: auto;
+    padding: 22px 20px 36px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .login-page::before:first-line {
+    font-size: 24px;
+  }
+
+  .login-card {
+    grid-column: 1;
+    margin: -16px 16px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 22px 18px;
+    margin: -16px 12px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-page *,
+  .login-page *::before {
+    transition: none !important;
+  }
+}

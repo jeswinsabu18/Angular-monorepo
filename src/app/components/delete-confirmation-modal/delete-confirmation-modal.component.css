@@ -1,0 +1,87 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: var(--overlay);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1000;
+}
+
+.modal-card {
+  background: var(--bg-secondary);
+
+  width: 420px;
+  max-width: 90%;
+
+  border-radius: 4px;
+
+  padding: 24px 22px;
+
+  box-shadow: var(--modal-shadow);
+}
+
+.modal-card h3 {
+  margin: 0 0 16px;
+
+  color: var(--text-primary);
+
+  font-size: 1.5rem;
+}
+
+.delete-message {
+  margin: 0 0 18px;
+
+  color: var(--text-secondary);
+
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+/* Buttons */
+.cancel-button,
+.delete-button {
+  border: none;
+  border-radius: 4px;
+
+  padding: 10px 16px;
+
+  cursor: pointer;
+
+  color: var(--white);
+}
+
+/* Cancel */
+.cancel-button {
+  background: var(--bg-secondary);
+
+  color: var(--primary);
+
+  border: 1px solid var(--primary);
+}
+
+/* Delete */
+.delete-button {
+  background: var(--primary);
+}
+
+/* Hover */
+
+.delete-button:hover {
+  background: var(--primary-hover);
+}
+.cancel-button:hover {
+   background: var(--primary-hover);
+   color: var(--white);
+}

@@ -1,0 +1,16 @@
+
+<label class="custom-checkbox" [for]="checkboxId">
+  <input
+    class="custom-checkbox-input"
+    type="checkbox"
+    [id]="checkboxId"
+    [checked]="checked"
+    [disabled]="disabled"
+    [attr.aria-label]="label ? null : ariaLabel || null"
+    (change)="onCheckboxChange($event)"
+  />
+
+  @if (label) {
+    <span class="custom-checkbox-label">{{ label }}</span>
+  }
+</label>

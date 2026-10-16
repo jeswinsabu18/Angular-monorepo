@@ -1,0 +1,28 @@
+<app-page-shell>
+  <div class="help-scroll">
+    <div class="help-page">
+      <header class="help-header">
+        <h1>Help &amp; User Guide</h1>
+        <p>Screenshots of each page with simple guidelines.</p>
+      </header>
+
+      @for (step of steps; track step.title; let i = $index) {
+        <section class="help-step">
+          <h2><span class="step-no">{{ i + 1 }}</span> {{ step.title }}</h2>
+
+          <div class="help-step-content">
+            <img class="help-shot" [src]="step.image" [alt]="step.alt" loading="lazy" />
+
+            <ul class="guidelines">
+              @for (line of step.guidelines; track line) {
+                <li>{{ line }}</li>
+              }
+            </ul>
+          </div>
+        </section>
+      }
+
+      <p class="help-footer">Still need help? Contact your application administrator.</p>
+    </div>
+  </div>
+</app-page-shell>

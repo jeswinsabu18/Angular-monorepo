@@ -1,0 +1,73 @@
+@if (employee(); as employee) {
+  <div class="details-card">
+    <!-- Employee Header -->
+    <div class="details-header">
+      <!-- Avatar -->
+      <div class="large-avatar">
+        {{ employee.employeeName.charAt(0).toUpperCase() }}
+      </div>
+
+      <!-- Employee Name -->
+      <div class="header-info">
+        <h2>
+          {{ employee.employeeName }}
+        </h2>
+
+        <p>
+          {{ employee.employeeId }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Employee Details -->
+    <div class="details-grid">
+      <!-- Employee ID -->
+      <div class="detail-item">
+        <span class="detail-label"> Employee ID </span>
+
+        <span class="detail-value">
+          {{ employee.employeeId }}
+        </span>
+      </div>
+
+      <!-- Age -->
+      <div class="detail-item">
+        <span class="detail-label"> Age </span>
+
+        <span class="detail-value">
+          {{ employee.employeeAge }}
+        </span>
+      </div>
+
+      <!-- Department -->
+      <div class="detail-item">
+        <span class="detail-label"> Department </span>
+
+        <span class="detail-value">
+          {{ employee.employeeDepartment }}
+        </span>
+      </div>
+
+      <!-- Role -->
+      <div class="detail-item">
+        <span class="detail-label"> Role </span>
+
+        <span class="detail-value">
+          {{ employee.employeeRole }}
+        </span>
+      </div>
+    </div>
+  </div>
+} @else {
+  <!-- Employee Not Found -->
+  <div class="not-found-card">
+    <div class="empty-icon">!</div>
+
+    <h2>Employee Not Found</h2>
+
+    <p>The selected employee could not be found.</p>
+  </div>
+}

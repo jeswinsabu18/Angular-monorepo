@@ -1,0 +1,388 @@
+:host {
+  display: block;
+
+  min-height: 100vh;
+
+  font-family: Arial, sans-serif;
+}
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+.list-page {
+  min-height: 100vh;
+
+  padding: 16px;
+
+  box-sizing: border-box;
+
+  background: var(--bg-primary);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.list-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 24px;
+}
+
+.list-header h1 {
+  margin: 0 0 5px;
+
+  color: var(--text-primary);
+
+  font-size: 16px;
+}
+
+.list-header p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 12px;
+}
+
+/* Employee count */
+
+.employee-count {
+  padding: 8px 13px;
+
+  border-radius: 4px;
+
+  background: var(--primary-light);
+
+  color: var(--primary);
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.employee-content {
+  display: flex;
+
+  gap: 22px;
+
+  align-items: flex-start;
+}
+
+/* =========================
+   EMPLOYEE LIST PANEL
+========================= */
+
+.employee-list-panel {
+  width: 280px;
+
+  min-width: 280px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.list-search {
+  display: block;
+
+  margin-bottom: 10px;
+}
+
+/* Input look comes from app-custom-input; only compact tokens are set here */
+.list-search app-custom-input {
+  --custom-input-min-height: 0;
+  --custom-input-padding: 10px 12px;
+  --custom-input-border-width: 1px;
+  --custom-input-radius: 4px;
+  --custom-input-font-size: inherit;
+  --custom-input-placeholder: var(--text-light);
+  --custom-input-hover-border-color: var(--border-secondary);
+}
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+.visually-hidden {
+  position: absolute;
+
+  width: 1px;
+
+  height: 1px;
+
+  padding: 0;
+
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+
+  white-space: nowrap;
+
+  border: 0;
+}
+
+/* =========================
+   EMPLOYEE LIST CARD
+========================= */
+
+.employee-list {
+  max-height: calc(100vh - 220px);
+
+  overflow-y: auto;
+
+  background: var(--bg-secondary);
+
+  border: 1px solid var(--border-teal);
+
+  border-radius: 4px;
+
+  padding: 8px;
+
+  box-sizing: border-box;
+
+  box-shadow: var(--card-shadow-soft);
+}
+
+/* =========================
+   EMPLOYEE ITEM
+========================= */
+
+.employee-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 11px 10px;
+
+  margin-bottom: 3px;
+
+  text-decoration: none;
+
+  color: inherit;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Normal hover */
+
+.employee-item:hover {
+  background: var(--bg-soft-hover);
+}
+
+/* Selected employee */
+
+.employee-item.selected {
+  background: var(--primary-light);
+}
+
+/* =========================
+   AVATAR
+========================= */
+
+.employee-avatar {
+  width: 36px;
+
+  height: 36px;
+
+  min-width: 36px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--primary-light);
+
+  color: var(--primary);
+
+  border: 1px solid var(--primary-border);
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  box-sizing: border-box;
+}
+
+/* Selected avatar */
+
+.employee-item.selected .employee-avatar {
+  background: var(--primary);
+
+  color: var(--white);
+
+  border-color: var(--primary);
+}
+
+/* =========================
+   EMPLOYEE SUMMARY
+========================= */
+
+.employee-summary {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.employee-name {
+  color: var(--text-primary);
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.employee-role {
+  margin-top: 3px;
+
+  color: var(--text-light);
+
+  font-size: 12px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+/* Selected employee text */
+
+.employee-item.selected .employee-name {
+  color: var(--primary);
+}
+
+.employee-item.selected .employee-role {
+  color: var(--primary-muted);
+}
+
+/* =========================
+   ARROW
+========================= */
+
+.employee-arrow {
+  color: var(--text-light);
+
+  font-size: 20px;
+
+  padding-right: 3px;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.employee-item:hover .employee-arrow {
+  color: var(--primary);
+}
+
+.employee-item.selected .employee-arrow {
+  color: var(--primary);
+
+  transform: translateX(2px);
+}
+
+/* =========================
+   DETAILS AREA
+========================= */
+
+.details-area {
+  flex: 1;
+
+  min-width: 0;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+.employee-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.employee-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.employee-list::-webkit-scrollbar-thumb {
+  background: var(--primary-border-light);
+
+  border-radius: 10px;
+}
+
+.employee-list::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .employee-content {
+    flex-direction: column;
+  }
+
+  .employee-list-panel {
+    width: 100%;
+
+    min-width: 0;
+  }
+
+  .employee-list {
+    max-height: 300px;
+  }
+
+  .details-area {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .list-page {
+    padding: 20px 15px;
+  }
+
+  .list-header {
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+  .list-header h1 {
+    font-size: 21px;
+  }
+
+  .employee-count {
+    font-size: 12px;
+  }
+}

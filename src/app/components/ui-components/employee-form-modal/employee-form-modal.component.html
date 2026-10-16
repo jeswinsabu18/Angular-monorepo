@@ -1,0 +1,125 @@
+@if (visible) {
+  <div class="modal-overlay" (click)="close.emit()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <h3>
+        {{ isEditing ? 'Edit Employee' : 'Add Employee' }}
+      </h3>
+
+      <form [formGroup]="employeeForm" (ngSubmit)="submit()" novalidate>
+        <!-- Employee ID -->
+
+        <div class="form-field">
+          <label for="employeeId"> Employee ID </label>
+
+          <input
+            id="employeeId"
+            type="number"
+            formControlName="employeeId"
+            [disabled]="isEditing"
+          />
+
+          @if (
+            employeeForm.controls['employeeId'].touched &&
+            employeeForm.controls['employeeId'].hasError('required')
+          ) {
+            <small class="field-error"> Employee ID is required. </small>
+          } @else if (
+            employeeForm.controls['employeeId'].touched &&
+            employeeForm.controls['employeeId'].hasError('pattern')
+          ) {
+            <small class="field-error"> Employee ID must be a valid positive number. </small>
+          }
+        </div>
+
+        <!-- Employee Name -->
+
+        <div class="form-field">
+          <app-custom-input
+            inputId="employeeName"
+            label="Employee Name"
+            type="text"
+            formControlName="employeeName"
+          >
+            @if (
+              employeeForm.controls['employeeName'].touched &&
+              employeeForm.controls['employeeName'].hasError('required')
+            ) {
+              <small class="field-error"> Name is required. </small>
+            } @else if (
+              employeeForm.controls['employeeName'].touched &&
+              employeeForm.controls['employeeName'].hasError('pattern')
+            ) {
+              <small class="field-error"> Name can only contain letters and spaces. </small>
+            }
+          </app-custom-input>
+        </div>
+
+        <!-- Employee Age -->
+
+        <div class="form-field">
+          <label for="employeeAge"> Age </label>
+
+          <input id="employeeAge" type="number" formControlName="employeeAge" />
+
+          @if (
+            employeeForm.controls['employeeAge'].touched &&
+            employeeForm.controls['employeeAge'].hasError('required')
+          ) {
+            <small class="field-error"> Age is required. </small>
+          } @else if (
+            employeeForm.controls['employeeAge'].touched &&
+            (employeeForm.controls['employeeAge'].hasError('pattern') ||
+              employeeForm.controls['employeeAge'].hasError('min') ||
+              employeeForm.controls['employeeAge'].hasError('max'))
+          ) {
+            <small class="field-error"> Age must be between 18 and 70. </small>
+          }
+        </div>
+
+        <!-- Department -->
+
+        <div class="form-field">
+          <app-custom-input
+            inputId="employeeDepartment"
+            label="Department"
+            type="text"
+            formControlName="employeeDepartment"
+          >
+            @if (
+              employeeForm.controls['employeeDepartment'].touched &&
+              employeeForm.controls['employeeDepartment'].hasError('required')
+            ) {
+              <small class="field-error"> Department is required. </small>
+            }
+          </app-custom-input>
+        </div>
+
+        <!-- Role -->
+
+        <div class="form-field">
+          <app-custom-input
+            inputId="employeeRole"
+            label="Role"
+            type="text"
+            formControlName="employeeRole"
+          >
+            @if (
+              employeeForm.controls['employeeRole'].touched &&
+              employeeForm.controls['employeeRole'].hasError('required')
+            ) {
+              <small class="field-error"> Role is required. </small>
+            }
+          </app-custom-input>
+        </div>
+
+        <!-- Buttons -->
+
+        <div class="modal-actions">
+          <button type="button" class="cancel-button" (click)="close.emit()">Cancel</button>
+
+          <button type="submit" class="save-button">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

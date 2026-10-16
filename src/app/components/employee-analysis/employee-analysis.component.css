@@ -1,0 +1,119 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  color: var(--text-primary);
+}
+
+.analytics-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 8px 12px 24px;
+  box-sizing: border-box;
+  overflow: auto;
+  scrollbar-color: var(--primary-border-light) transparent;
+  scrollbar-width: thin;
+}
+
+.analytics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.analytics-header h1 {
+  margin: 0 0 5px;
+  font-size: 20px;
+}
+
+.analytics-header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.total-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 130px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  background: var(--bg-secondary);
+}
+
+.total-card span {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.total-card strong {
+  color: var(--primary);
+  font-size: 22px;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 18px;
+  width: 100%;
+  min-width: 0;
+}
+
+.chart-card {
+  min-width: 0;
+  padding: 14px;
+  box-sizing: border-box;
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.empty-state {
+  margin: 0;
+  padding: 20px;
+  border: 1px dashed var(--border-primary);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .charts-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .analytics-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .total-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .chart-card {
+    padding: 10px;
+  }
+
+  .analytics-page {
+    padding: 4px 0 16px;
+  }
+}

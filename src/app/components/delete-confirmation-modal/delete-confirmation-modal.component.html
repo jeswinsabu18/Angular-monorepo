@@ -1,0 +1,13 @@
+@if (visible) {
+  <div class="modal-overlay" (click)="close.emit()">
+    <div class="modal-card delete-card" (click)="$event.stopPropagation()">
+      <h3>Delete Employee</h3>
+      <p class="delete-message">{{ message }}</p>
+
+      <div class="modal-actions">
+        <button type="button" class="cancel-button" (click)="close.emit()">Cancel</button>
+        <button type="button" class="delete-button" (click)="confirm.emit()">Delete</button>
+      </div>
+    </div>
+  </div>
+}

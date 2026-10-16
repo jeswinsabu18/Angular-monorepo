@@ -1,0 +1,61 @@
+<div class="list-page">
+  <!-- Page Header -->
+  <div class="list-header">
+    <div>
+      <h1>Employees</h1>
+
+      <p>Select an employee to view their details</p>
+    </div>
+
+    <div class="employee-count">{{ employees().length }} Employees</div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="employee-content">
+    <!-- LEFT EMPLOYEE LIST -->
+    <div class="employee-list-panel">
+      <!-- Search -->
+      <div class="list-search">
+        <app-custom-input
+          type="search"
+          ariaLabel="Search employees"
+          placeholder="Search employees..."
+          [ngModel]="searchTerm()"
+          (ngModelChange)="onSearch($event)"
+        />
+      </div>
+
+      <!-- Employee List -->
+      <div class="employee-list">
+        @for (employee of filteredEmployees(); track employee.employeeId) {
+          <a
+            class="employee-item"
+            [routerLink]="['/employees/list', employee.employeeId]"
+            routerLinkActive="selected"
+          >
+            <!-- Avatar -->
+            <div class="employee-avatar">
+              {{ employee.employeeName.charAt(0).toUpperCase() }}
+            </div>
+
+            <!-- Employee Information -->
+            <div class="employee-summary">
+              <div class="employee-name">
+                {{ employee.employeeName }}
+              </div>
+
+              <div class="employee-role">
+                {{ employee.employeeId }}
+              </div>
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE DETAILS -->
+    <div class="details-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

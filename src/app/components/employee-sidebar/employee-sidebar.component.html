@@ -1,0 +1,70 @@
+
+<aside class="sidebar" [class.expanded]="isExpanded">
+  <button
+    type="button"
+    class="toggle-button"
+    (click)="toggle()"
+    [attr.aria-expanded]="isExpanded"
+    [attr.aria-label]="isExpanded ? 'Collapse sidebar' : 'Expand sidebar'"
+    [attr.title]="isExpanded ? 'Collapse sidebar' : 'Expand sidebar'"
+  >
+    <svg class="nav-icon" aria-hidden="true" focusable="false">
+      <use href="assets/icons.svg#menu"></use>
+    </svg>
+  </button>
+
+  <nav class="navigation">
+    <a
+      routerLink="/employees/table"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-item"
+      aria-label="Employee Table"
+      title="Employee Table"
+    >
+      <svg class="nav-icon" aria-hidden="true" focusable="false">
+        <use href="assets/icons.svg#table"></use>
+      </svg>
+      <span class="nav-label">Employee Table</span>
+    </a>
+
+    <a
+      routerLink="/employees/list"
+      routerLinkActive="active"
+      class="nav-item"
+      aria-label="Employee List"
+      title="Employee List"
+    >
+      <svg class="nav-icon" aria-hidden="true" focusable="false">
+        <use href="assets/icons.svg#list"></use>
+      </svg>
+      <span class="nav-label">Employee List</span>
+    </a>
+
+    <a
+      routerLink="/employees/analytics"
+      routerLinkActive="active"
+      class="nav-item"
+      aria-label="Department Analytics"
+      title="Department Analytics"
+    >
+      <svg
+        class="nav-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d="M3 20h18" />
+        <rect x="5" y="11" width="3.5" height="9" rx="0.5" />
+        <rect x="10.25" y="5" width="3.5" height="15" rx="0.5" />
+        <rect x="15.5" y="8" width="3.5" height="12" rx="0.5" />
+      </svg>
+      <span class="nav-label">Employee Analysis</span>
+    </a>
+  </nav>
+</aside>

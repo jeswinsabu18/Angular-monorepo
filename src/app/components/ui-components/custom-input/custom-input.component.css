@@ -1,0 +1,133 @@
+/*
+ * Shared custom input styling.
+ *
+ * Colors come from the global theme variables (styles.css), so the
+ * component follows the light and dark themes automatically.
+ *
+ * Parents can fine-tune the look through these optional custom properties
+ * (set them on the <app-custom-input> element):
+ *
+ *   --custom-input-min-height          --custom-input-padding
+ *   --custom-input-border-width        --custom-input-border-color
+ *   --custom-input-hover-border-color  --custom-input-radius
+ *   --custom-input-bg                  --custom-input-color
+ *   --custom-input-font-size           --custom-input-font-family
+ *   --custom-input-placeholder         --custom-input-focus-ring
+ *   --custom-input-label-size          --custom-input-label-weight
+ *   --custom-input-label-color
+ *
+ * Width and spacing are controlled by the parent through the host element.
+ */
+
+:host {
+  display: block;
+}
+
+/* =========================
+   LABEL
+========================= */
+
+.custom-input-label {
+  display: block;
+  margin-bottom: 6px;
+
+  font-size: var(--custom-input-label-size, 14px);
+  font-weight: var(--custom-input-label-weight, 600);
+
+  color: var(--custom-input-label-color, var(--text-primary));
+}
+
+.custom-input-required {
+  margin-left: 2px;
+
+  color: var(--danger);
+}
+
+/* =========================
+   INPUT
+========================= */
+
+.custom-input-field {
+  display: block;
+
+  width: 100%;
+  min-height: var(--custom-input-min-height, 42px);
+  box-sizing: border-box;
+
+  padding: var(--custom-input-padding, 9px 12px);
+
+  border: var(--custom-input-border-width, 1.5px) solid
+    var(--custom-input-border-color, var(--border-secondary));
+  border-radius: var(--custom-input-radius, 6px);
+
+  background: var(--custom-input-bg, var(--bg-secondary));
+  color: var(--custom-input-color, var(--text-primary));
+
+  font-size: var(--custom-input-font-size, 15px);
+  font-family: var(--custom-input-font-family, inherit);
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.custom-input-field::placeholder {
+  color: var(--custom-input-placeholder, var(--placeholder));
+}
+
+.custom-input-field:hover {
+  border-color: var(--custom-input-hover-border-color, var(--text-light));
+}
+
+.custom-input-field:focus {
+  border-color: var(--primary);
+  box-shadow: var(--custom-input-focus-ring, 0 0 0 3px var(--primary-ring));
+}
+
+/* =========================
+   DISABLED
+========================= */
+
+.custom-input-field:disabled {
+  background: var(--bg-hover);
+  color: var(--text-muted);
+
+  border-color: var(--border-primary);
+
+  cursor: not-allowed;
+}
+
+/* =========================
+   INVALID
+========================= */
+
+.custom-input-field.is-invalid,
+.custom-input-field.is-invalid:hover,
+.custom-input-field.is-invalid:focus {
+  border-color: var(--danger);
+}
+
+/* =========================
+   ERROR MESSAGE
+========================= */
+
+.custom-input-error:empty {
+  display: none;
+}
+
+.custom-input-error-message {
+  display: block;
+  margin-top: 5px;
+
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-input-field {
+    transition: none;
+  }
+}

@@ -1,0 +1,37 @@
+
+<app-page-shell>
+  <app-toolbar
+    toolbar
+    [searchTerm]="searchTerm()"
+    [canAdd]="canAdd"
+    (searchChanged)="onSearch($event)"
+    (addEmployee)="openAddModal()"
+  ></app-toolbar>
+
+  <app-employee-table
+    [employees]="employees()"
+    [sortField]="sortField()"
+    [sortDirection]="sortDirection()"
+    [canEdit]="canEdit"
+    [canDelete]="canDelete"
+    (sortChanged)="sortBy($event)"
+    (editEmployee)="openEditModal($event)"
+    (deleteEmployee)="openDeleteModal($event)"
+  ></app-employee-table>
+
+  @if (isModalOpen) {
+    <app-employee-form-modal
+      [visible]="isModalOpen"
+      [isEditing]="isEditing"
+      [form]="form"
+      (close)="closeModal()"
+      (submitForm)="saveEmployee($event)"
+    ></app-employee-form-modal>
+  }
+
+  <app-delete-confirmation-modal
+    [visible]="isDeleteModalOpen"
+    (close)="closeDeleteModal()"
+    (confirm)="confirmDelete()"
+  ></app-delete-confirmation-modal>
+</app-page-shell>

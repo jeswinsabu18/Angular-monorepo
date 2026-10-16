@@ -1,0 +1,242 @@
+<app-page-shell>
+  <div class="about-scroll">
+    <div class="about-page">
+      <!-- Header -->
+      <div class="about-header">
+        <div>
+          <h1>About</h1>
+          <p>Information about this application, how it handles data, and its limits.</p>
+        </div>
+        <span class="header-badge">Version {{ appVersion }}</span>
+      </div>
+
+      <!-- Hero -->
+      <section class="hero">
+        <div class="app-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M20 8v6M23 11h-6" />
+          </svg>
+        </div>
+
+        <div class="hero-text">
+          <h2>{{ appName }}</h2>
+          <p>
+            A simple, secure-by-design workspace for keeping employee records
+            organised. Find people quickly, keep their details accurate, and
+            control exactly who is allowed to change them.
+          </p>
+          <div class="hero-tags">
+            <span class="tag">{{ releaseStatus }}</span>
+            <span class="tag">Updated {{ lastUpdated }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live stats -->
+      <section class="stats" aria-label="Application at a glance">
+        <div class="stat">
+          <strong>{{ employeeCount() }}</strong>
+          <span>Employees on record</span>
+        </div>
+        <div class="stat">
+          <strong>{{ userCount }}</strong>
+          <span>Registered users</span>
+        </div>
+        <div class="stat">
+          <strong>{{ sessionMinutes }} min</strong>
+          <span>Session length</span>
+        </div>
+        <div class="stat">
+          <strong>3</strong>
+          <span>Permission types</span>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="card">
+        <h2>What you can do</h2>
+        <div class="feature-grid">
+          @for (feature of features; track feature.title) {
+            <div class="feature">
+              <span class="feature-icon" aria-hidden="true">
+                <svg focusable="false">
+                  <use [attr.href]="'assets/icons.svg#' + feature.icon"></use>
+                </svg>
+              </span>
+              <div>
+                <h3>{{ feature.title }}</h3>
+                <p>{{ feature.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- Roles -->
+      <section class="card">
+        <h2>Who can do what</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th>New user</th>
+                <th>User with permission</th>
+                <th>Administrator</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>View, search and sort employees</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Add employees</td>
+                <td>No</td>
+                <td>If Add is granted</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Edit employees</td>
+                <td>No</td>
+                <td>If Edit is granted</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Delete employees</td>
+                <td>No</td>
+                <td>If Delete is granted</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Manage user access</td>
+                <td>No</td>
+                <td>No</td>
+                <td>Yes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Signed-in info -->
+      <section class="card">
+        <h2>Your session</h2>
+        <div class="info-row">
+          <span>Signed in as</span>
+          <strong>{{ currentUserName }}</strong>
+        </div>
+        <div class="info-row">
+          <span>Account type</span>
+          <strong>{{ currentRole }}</strong>
+        </div>
+      </section>
+
+      <!-- App info -->
+      <section class="card">
+        <h2>Application information</h2>
+        <div class="info-row">
+          <span>Application name</span>
+          <strong>{{ appName }}</strong>
+        </div>
+        <div class="info-row">
+          <span>Version</span>
+          <strong>{{ appVersion }}</strong>
+        </div>
+        <div class="info-row">
+          <span>Release status</span>
+          <strong>{{ releaseStatus }}</strong>
+        </div>
+        <div class="info-row">
+          <span>Last updated</span>
+          <strong>{{ lastUpdated }}</strong>
+        </div>
+
+        <h3 class="sub">Built with</h3>
+        <div class="chips">
+          @for (tech of technologies; track tech) {
+            <span class="chip">{{ tech }}</span>
+          }
+        </div>
+      </section>
+
+      <!-- Data handling -->
+      <section class="card">
+        <h2>How your data is stored</h2>
+        <p>
+          This version has no server. Everything is kept in the browser you are
+          using, as shown below.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Where</th>
+                <th>Why</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of storage; track item.data) {
+                <tr>
+                  <td>{{ item.data }}</td>
+                  <td>{{ item.location }}</td>
+                  <td>{{ item.purpose }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <p class="note">
+          Because data lives in one browser, it is not shared between devices
+          and may be lost if browser data is cleared.
+        </p>
+      </section>
+
+      <!-- Privacy -->
+      <section class="card">
+        <h2>Privacy and security</h2>
+        <ul>
+          <li>Do not enter sensitive or confidential personal information.</li>
+          <li>
+            Passwords are saved unencrypted in this browser. Do not reuse a
+            password that you use anywhere else.
+          </li>
+          <li>Log out when you finish, particularly on a shared computer.</li>
+          <li>
+            Permission checks happen in the browser, so they are a convenience
+            for this prototype, not a substitute for server-side security.
+          </li>
+        </ul>
+      </section>
+
+      <!-- Disclaimer -->
+      <section class="card">
+        <h2>Disclaimer</h2>
+        <p>
+          This application is intended for demonstration, learning, and
+          internal testing. Information shown may be sample data and should be
+          verified before it is used for operational decisions.
+        </p>
+        <p>
+          It should not be treated as a secure production system for
+          confidential employee information without server-side security,
+          authorisation, backups, and data protection measures.
+        </p>
+        <p>
+          The application is provided as is, without a guarantee that it will
+          be error-free or suitable for every business requirement.
+        </p>
+      </section>
+
+      <footer class="about-footer">
+        <p>{{ appName }} &middot; Version {{ appVersion }}</p>
+        <p>Need guidance? Open <strong>Help</strong> from the Settings menu.</p>
+      </footer>
+    </div>
+  </div>
+</app-page-shell>

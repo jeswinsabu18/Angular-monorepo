@@ -1,0 +1,267 @@
+:host {
+  display: block;
+}
+
+/* =========================
+   DETAILS CARD
+========================= */
+
+.details-card {
+  width: min(100%, 620px);
+
+  min-height: 400px;
+
+  box-sizing: border-box;
+
+  background: var(--bg-secondary);
+
+  border: 1px solid var(--border-teal);
+
+  border-radius: 4px;
+
+  padding: 28px;
+
+  box-shadow: var(--card-shadow-soft);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.details-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+}
+
+/* =========================
+   LARGE AVATAR
+========================= */
+
+.large-avatar {
+  width: 70px;
+
+  height: 70px;
+
+  min-width: 70px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--primary-light);
+
+  color: var(--primary);
+
+  border: 1px solid var(--primary-border);
+
+  font-size: 25px;
+
+  font-weight: 700;
+
+  box-sizing: border-box;
+}
+
+/* =========================
+   HEADER INFORMATION
+========================= */
+
+.header-info h2 {
+  margin: 0 0 6px;
+
+  color: var(--text-primary);
+
+  font-size: 17px;
+}
+
+.header-info p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 14px;
+}
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+  height: 1px;
+
+  background: var(--border-teal);
+
+  margin: 25px 0;
+}
+
+/* =========================
+   DETAILS GRID
+========================= */
+
+.details-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+/* =========================
+   DETAIL ITEM
+========================= */
+
+.detail-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+
+  padding: 16px;
+
+  background: var(--bg-tertiary);
+
+  border: 1px solid var(--border-teal);
+
+  border-radius: 8px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+/* Hover on detail box */
+
+.detail-item:hover {
+  background: var(--bg-soft-hover);
+
+  border-color: var(--primary-border-light);
+}
+
+/* =========================
+   DETAIL LABEL
+========================= */
+
+.detail-label {
+  color: var(--primary);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.3px;
+}
+
+/* =========================
+   DETAIL VALUE
+========================= */
+
+.detail-value {
+  color: var(--text-primary);
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+/* =========================
+   NOT FOUND
+========================= */
+
+.not-found-card {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: var(--bg-secondary);
+
+  border: 1px solid var(--border-teal);
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  box-shadow: var(--card-shadow-soft);
+}
+
+/* =========================
+   EMPTY ICON
+========================= */
+
+.empty-icon {
+  width: 45px;
+
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 12px;
+
+  border-radius: 50%;
+
+  background: var(--primary-light);
+
+  color: var(--primary);
+
+  border: 1px solid var(--primary-border);
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+/* =========================
+   NOT FOUND TEXT
+========================= */
+
+.not-found-card h2 {
+  margin: 0 0 7px;
+
+  color: var(--text-primary);
+
+  font-size: 19px;
+}
+
+.not-found-card p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+  .details-card {
+    padding: 20px;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}

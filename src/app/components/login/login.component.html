@@ -1,0 +1,70 @@
+<div class="login-page">
+  <div class="login-card">
+    <h1>Employee Management System</h1>
+
+    <h2>Login</h2>
+
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+      <!-- Username -->
+
+      <div class="form-group">
+        <app-custom-input
+          inputId="user-name"
+          label="User Name"
+          type="text"
+          formControlName="userName"
+          placeholder="Enter user name"
+          autocomplete="username"
+        >
+          @if (
+            loginForm.controls.userName.touched && loginForm.controls.userName.hasError('required')
+          ) {
+            <span class="validation-message"> User name is required </span>
+          }
+        </app-custom-input>
+      </div>
+
+      <!-- Password -->
+
+      <div class="form-group">
+        <app-custom-input
+          inputId="user-password"
+          label="Password"
+          type="password"
+          formControlName="userPassword"
+          placeholder="Enter password"
+          autocomplete="current-password"
+        >
+          @if (
+            loginForm.controls.userPassword.touched &&
+            loginForm.controls.userPassword.hasError('required')
+          ) {
+            <span class="validation-message"> Password is required </span>
+          }
+        </app-custom-input>
+      </div>
+
+      <!-- Error -->
+
+      @if (errorMessage) {
+        <p class="error-message">
+          {{ errorMessage }}
+        </p>
+      }
+
+      <!-- Login -->
+
+      <button type="submit" class="login-button">Login</button>
+
+      <!-- Create Account -->
+
+      <div class="create-account">
+        <span> Don't have an account? </span>
+
+        <button type="button" class="create-account-button" (click)="goToSignup()">
+          Create Account
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

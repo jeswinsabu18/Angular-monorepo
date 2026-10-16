@@ -1,0 +1,32 @@
+@if (label) {
+  <label class="custom-input-label" [for]="inputId">
+    {{ label }}
+    @if (required) {
+      <span class="custom-input-required" aria-hidden="true">*</span>
+    }
+  </label>
+}
+
+<input
+  class="custom-input-field"
+  [class.is-invalid]="showInvalid"
+  [id]="inputId"
+  [type]="type"
+  [value]="value()"
+  [disabled]="isDisabled"
+  [attr.placeholder]="placeholder || null"
+  [attr.autocomplete]="autocomplete || null"
+  [attr.aria-label]="label ? null : ariaLabel || null"
+  [attr.aria-required]="required ? 'true' : null"
+  [attr.aria-invalid]="showInvalid ? 'true' : null"
+  [attr.aria-describedby]="showInvalid ? errorId : null"
+  (input)="onInput($event)"
+  (blur)="onBlur()"
+/>
+
+<div class="custom-input-error" [id]="errorId">
+  @if (errorMessage) {
+    <span class="custom-input-error-message">{{ errorMessage }}</span>
+  }
+  <ng-content />
+</div>
