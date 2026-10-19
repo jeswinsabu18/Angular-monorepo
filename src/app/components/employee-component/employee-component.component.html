@@ -1,5 +1,5 @@
 
-<app-page-shell>
+<app-page-shell class="employee-table-shell">
   <app-toolbar
     toolbar
     [searchTerm]="searchTerm()"
@@ -14,6 +14,7 @@
     [rowKey]="'employeeId'"
     [sortField]="sortField()"
     [sortDirection]="sortDirection()"
+    [paginationResetTrigger]="searchTerm()"
     [canEdit]="canEdit"
     [canDelete]="canDelete"
     ariaLabel="Employee records"

@@ -126,7 +126,7 @@ export class EmployeeAnalysisComponent {
         data: departments.map((item) => item.department),
         axisLabel: {
           interval: 0,
-          rotate: departments.length > 4 ? 25 : 0,
+          rotate: departments.length > 4 ? 0 : 0,
           color: colors.secondaryText,
           fontSize: 10,
         },

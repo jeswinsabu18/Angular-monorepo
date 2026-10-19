@@ -74,3 +74,15 @@
 .primary-button:hover {
   background: var(--primary-hover);
 }
+
+@media (max-width: 600px) {
+  .search-container {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .search-field {
+    width: 100%;
+    min-width: 0;
+  }
+}
