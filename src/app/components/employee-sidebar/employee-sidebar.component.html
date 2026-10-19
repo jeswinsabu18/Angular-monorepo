@@ -1,17 +1,4 @@
 <aside class="sidebar" [class.expanded]="isExpanded">
-  <button
-    type="button"
-    class="toggle-button"
-    (click)="toggle()"
-    [attr.aria-expanded]="isExpanded"
-    [attr.aria-label]="isExpanded ? 'Collapse sidebar' : 'Expand sidebar'"
-    [attr.title]="isExpanded ? 'Collapse sidebar' : 'Expand sidebar'"
-  >
-    <svg class="nav-icon" aria-hidden="true" focusable="false">
-      <use href="assets/icons.svg#menu"></use>
-    </svg>
-  </button>
-
   <nav class="navigation">
     <a
       routerLink="/employees/table"
@@ -66,4 +53,17 @@
       <span class="nav-label">Employee Analysis</span>
     </a>
   </nav>
+
+  <button
+    type="button"
+    class="toggle-button"
+    (click)="toggle()"
+    [attr.aria-expanded]="isExpanded"
+    [attr.aria-label]="isExpanded ? 'Collapse sidebar' : 'Expand sidebar'"
+    [attr.title]="isExpanded ? 'Collapse sidebar' : 'Expand sidebar'"
+  >
+    <svg class="nav-icon" aria-hidden="true" focusable="false">
+      <use href="assets/icons.svg#menu"></use>
+    </svg>
+  </button>
 </aside>
