@@ -1,5 +1,5 @@
 
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
@@ -11,8 +11,13 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { EmployeeFormValue } from '../../models/employee-form.model';
 import { Employee } from '../../models/employee.model';
 import { TableColumn } from '../../models/table-column.model';
+
 import { AuthService } from '../../services/auth.service';
 import { EmployeeService } from '../../services/employee.service';
+import {
+  EmployeeSortField,
+  MockEmployeeApiService,
+} from '../../services/mock-employee-api.service';
 
 @Component({
   selector: 'app-employee-component',
@@ -32,6 +37,7 @@ export class EmployeeComponent {
 
   private readonly employeeService = inject(EmployeeService);
   private readonly authService = inject(AuthService);
+  private readonly mockEmployeeApi = inject(MockEmployeeApiService);
   private readonly router = inject(Router);
 
   public readonly employeeColumns: TableColumn[] = [
@@ -46,45 +52,24 @@ export class EmployeeComponent {
 
   public readonly sortDirection = signal<'asc' | 'desc'>('asc');
 
-  public readonly sortField = signal<'employeeId' | 'employeeAge'>(
+  public readonly sortField = signal<EmployeeSortField>(
     'employeeId',
   );
 
-  public readonly employees = computed(() => {
-    const query = this.searchTerm().trim().toLowerCase();
-    const sortField = this.sortField();
-    const sortDirection = this.sortDirection();
+  // These rows contain only the current page's employees.
+  public readonly pageRows = signal<Employee[]>([]);
 
-    const filtered = this.employeeService.employees().filter((employee) => {
-      if (!query) {
-        return true;
-      }
+  public readonly currentPage = signal(1);
+  public readonly pageSize = signal(5);
+  public readonly totalItems = signal(0);
 
-      return (
-        employee.employeeName.toLowerCase().includes(query) ||
-        employee.employeeId.toString().includes(query)
-      );
-    });
-
-    return [...filtered].sort((a, b) => {
-      const left = a[sortField];
-      const right = b[sortField];
-
-      if (left < right) {
-        return sortDirection === 'asc' ? -1 : 1;
-      }
-
-      if (left > right) {
-        return sortDirection === 'asc' ? 1 : -1;
-      }
-
-      return 0;
-    });
-  });
+  public readonly isLoading = signal(false);
+  public readonly loadError = signal('');
 
   public isModalOpen = false;
   public isDeleteModalOpen = false;
   public isEditing = false;
+
   public editingEmployeeId: number | null = null;
   public employeeToDeleteId: number | null = null;
 
@@ -95,6 +80,10 @@ export class EmployeeComponent {
     employeeDepartment: '',
     employeeRole: '',
   };
+
+  public constructor() {
+    this.loadEmployeesPage();
+  }
 
   public get canAdd(): boolean {
     return this.authService.hasPermission('add');
@@ -108,6 +97,53 @@ export class EmployeeComponent {
     return this.authService.hasPermission('delete');
   }
 
+  public loadEmployeesPage(): void {
+    this.isLoading.set(true);
+    this.loadError.set('');
+
+    this.mockEmployeeApi
+      .getEmployeesPage({
+        page: this.currentPage(),
+        pageSize: this.pageSize(),
+        search: this.searchTerm(),
+        sortField: this.sortField(),
+        sortDirection: this.sortDirection(),
+      })
+      .subscribe({
+        next: (response) => {
+          this.pageRows.set(response.data);
+          this.totalItems.set(response.totalItems);
+          this.currentPage.set(response.page);
+          this.isLoading.set(false);
+        },
+
+        error: (error: unknown) => {
+          console.error(
+            'Failed to load employees page:',
+            error,
+          );
+
+          this.pageRows.set([]);
+          this.totalItems.set(0);
+          this.loadError.set(
+            'Unable to load employees. Please try again.',
+          );
+          this.isLoading.set(false);
+        },
+      });
+  }
+
+  public onPageChanged(page: number): void {
+    this.currentPage.set(page);
+    this.loadEmployeesPage();
+  }
+
+  public onPageSizeChanged(size: number): void {
+    this.pageSize.set(size);
+    this.currentPage.set(1);
+    this.loadEmployeesPage();
+  }
+
   public onSearch(value: string | Event): void {
     const nextValue =
       typeof value === 'string'
@@ -115,15 +151,16 @@ export class EmployeeComponent {
         : (value.target as HTMLInputElement).value;
 
     this.searchTerm.set(nextValue);
-  }
-
-  public logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    this.currentPage.set(1);
+    this.loadEmployeesPage();
   }
 
   public sortBy(field: string): void {
-    if (field !== 'employeeId' && field !== 'employeeAge') {
+    if (
+      field !== 'employeeId' &&
+      field !== 'employeeName' &&
+      field !== 'employeeAge'
+    ) {
       return;
     }
 
@@ -131,11 +168,18 @@ export class EmployeeComponent {
       this.sortDirection.update((direction) =>
         direction === 'asc' ? 'desc' : 'asc',
       );
-      return;
+    } else {
+      this.sortField.set(field);
+      this.sortDirection.set('asc');
     }
 
-    this.sortField.set(field);
-    this.sortDirection.set('asc');
+    this.currentPage.set(1);
+    this.loadEmployeesPage();
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   public onEditRow(row: object): void {
@@ -214,12 +258,21 @@ export class EmployeeComponent {
   }
 
   public confirmDelete(): void {
-    if (!this.canDelete || this.employeeToDeleteId === null) {
+    if (
+      !this.canDelete ||
+      this.employeeToDeleteId === null
+    ) {
       return;
     }
 
-    this.employeeService.deleteEmployee(this.employeeToDeleteId);
+    this.employeeService.deleteEmployee(
+      this.employeeToDeleteId,
+    );
+
     this.closeDeleteModal();
+
+    // Reload in case the current page has fewer records now.
+    this.loadEmployeesPage();
   }
 
   public saveEmployee(formData: EmployeeFormValue): void {
@@ -256,7 +309,10 @@ export class EmployeeComponent {
       employeeRole: formData.employeeRole.trim(),
     };
 
-    if (this.isEditing && this.editingEmployeeId !== null) {
+    if (
+      this.isEditing &&
+      this.editingEmployeeId !== null
+    ) {
       this.employeeService.updateEmployee(
         this.editingEmployeeId,
         employee,
@@ -266,5 +322,6 @@ export class EmployeeComponent {
     }
 
     this.closeModal();
+    this.loadEmployeesPage();
   }
 }

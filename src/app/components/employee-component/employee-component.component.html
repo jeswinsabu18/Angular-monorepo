@@ -8,16 +8,36 @@
     (addEmployee)="openAddModal()"
   ></app-toolbar>
 
+  @if (isLoading()) {
+    <p class="loading-message" role="status">
+      Loading employees...
+    </p>
+  }
+
+  @if (loadError()) {
+    <p class="error-message" role="alert">
+      {{ loadError() }}
+    </p>
+
+    <button type="button" (click)="loadEmployeesPage()">
+      Retry
+    </button>
+  }
+
   <app-data-table
-    [rows]="employees()"
+    [rows]="pageRows()"
     [columns]="employeeColumns"
     [rowKey]="'employeeId'"
     [sortField]="sortField()"
     [sortDirection]="sortDirection()"
-    [paginationResetTrigger]="searchTerm()"
+    [currentPage]="currentPage()"
+    [pageSize]="pageSize()"
+    [totalItems]="totalItems()"
     [canEdit]="canEdit"
     [canDelete]="canDelete"
     ariaLabel="Employee records"
+    (pageChanged)="onPageChanged($event)"
+    (pageSizeChanged)="onPageSizeChanged($event)"
     (sortChanged)="sortBy($event)"
     (editRow)="onEditRow($event)"
     (deleteRow)="onDeleteRow($event)"

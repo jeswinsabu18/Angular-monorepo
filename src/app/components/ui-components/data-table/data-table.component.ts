@@ -2,10 +2,8 @@
 import {
   Component,
   computed,
-  effect,
   input,
   output,
-  signal,
 } from '@angular/core';
 
 import { TableColumn } from '../../../models/table-column.model';
@@ -18,39 +16,40 @@ import { TableColumn } from '../../../models/table-column.model';
 })
 export class DataTableComponent {
   public readonly rows = input<object[]>([]);
-
   public readonly columns = input<TableColumn[]>([]);
-
   public readonly rowKey = input('id');
 
   public readonly sortField = input('');
-
   public readonly sortDirection = input<'asc' | 'desc'>('asc');
 
   public readonly canEdit = input(false);
-
   public readonly canDelete = input(false);
-
   public readonly ariaLabel = input('Data table');
 
-  public readonly pageSizeOptions = input<number[]>([5, 10, 25, 50]);
+  public readonly pageSizeOptions = input<number[]>([
+    5,
+    10,
+    25,
+    50,
+  ]);
 
-  public readonly paginationResetTrigger = input<unknown>();
+  // Pagination values are provided by the parent component.
+  public readonly currentPage = input(1);
+  public readonly pageSize = input(5);
+  public readonly totalItems = input(0);
 
+  // Events sent to the parent component.
+  public readonly pageChanged = output<number>();
+  public readonly pageSizeChanged = output<number>();
   public readonly sortChanged = output<string>();
-
   public readonly editRow = output<object>();
-
   public readonly deleteRow = output<object>();
 
-  public readonly currentPage = signal(1);
-
-  public readonly pageSize = signal(5);
-
-  public readonly totalItems = computed(() => this.rows().length);
-
   public readonly totalPages = computed(() =>
-    Math.max(1, Math.ceil(this.totalItems() / this.pageSize())),
+    Math.max(
+      1,
+      Math.ceil(this.totalItems() / this.pageSize()),
+    ),
   );
 
   public readonly startItem = computed(() =>
@@ -60,52 +59,40 @@ export class DataTableComponent {
   );
 
   public readonly endItem = computed(() =>
-    Math.min(this.currentPage() * this.pageSize(), this.totalItems()),
+    Math.min(
+      this.currentPage() * this.pageSize(),
+      this.totalItems(),
+    ),
   );
 
-  public readonly visibleRows = computed(() => {
-    const startIndex = (this.currentPage() - 1) * this.pageSize();
-
-    return this.rows().slice(startIndex, startIndex + this.pageSize());
-  });
+  // The API already returns a paginated array.
+  // Do not apply slice() again in this component.
+  public readonly visibleRows = computed(() => this.rows());
 
   public readonly pageNumbers = computed(() => {
     const maxVisiblePages = 5;
     const halfWindow = Math.floor(maxVisiblePages / 2);
 
-    let startPage = Math.max(1, this.currentPage() - halfWindow);
+    let startPage = Math.max(
+      1,
+      this.currentPage() - halfWindow,
+    );
+
     let endPage = Math.min(
       this.totalPages(),
       startPage + maxVisiblePages - 1,
     );
 
-    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    startPage = Math.max(
+      1,
+      endPage - maxVisiblePages + 1,
+    );
 
     return Array.from(
       { length: endPage - startPage + 1 },
       (_, index) => startPage + index,
     );
   });
-
-  private previousPaginationResetTrigger: unknown;
-
-  public constructor() {
-    effect(() => {
-      const resetTrigger = this.paginationResetTrigger();
-      const totalPages = this.totalPages();
-      const currentPage = this.currentPage();
-      const nextPage =
-        resetTrigger !== this.previousPaginationResetTrigger
-          ? 1
-          : Math.min(currentPage, totalPages);
-
-      this.previousPaginationResetTrigger = resetTrigger;
-
-      if (nextPage !== currentPage) {
-        this.currentPage.set(nextPage);
-      }
-    });
-  }
 
   public changePage(page: number): void {
     if (
@@ -116,7 +103,7 @@ export class DataTableComponent {
       return;
     }
 
-    this.currentPage.set(page);
+    this.pageChanged.emit(page);
   }
 
   public onPageSizeChange(event: Event): void {
@@ -127,24 +114,28 @@ export class DataTableComponent {
       return;
     }
 
-    this.pageSize.set(newPageSize);
-    this.currentPage.set(1);
+    this.pageSizeChanged.emit(newPageSize);
   }
 
-  public getCellValue(row: object, key: string): unknown {
-    const value = (row as Record<string, unknown>)[key];
-
-    return value ?? '—';
+  public getCellValue(
+    row: object,
+    key: string,
+  ): unknown {
+    return (
+      (row as Record<string, unknown>)[key] ?? '—'
+    );
   }
 
   public getRowKey(row: object): string | number {
-    const value = this.getCellValue(row, this.rowKey());
+    const value = this.getCellValue(
+      row,
+      this.rowKey(),
+    );
 
-    if (typeof value === 'string' || typeof value === 'number') {
-      return value;
-    }
-
-    return JSON.stringify(row);
+    return typeof value === 'string' ||
+      typeof value === 'number'
+      ? value
+      : JSON.stringify(row);
   }
 
   public requestSort(column: TableColumn): void {
