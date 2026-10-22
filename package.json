@@ -2,7 +2,6 @@
   "name": "angularproject",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "nx serve employee-management",
     "build": "nx build employee-management",
     "watch": "nx run employee-management:watch",

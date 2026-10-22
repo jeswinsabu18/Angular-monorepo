@@ -48,11 +48,12 @@ The application lives in `apps/employee-management`. Shared libraries are in `pa
 Feature and data-access libraries are grouped by domain:
 
 - `packages/employee/data`, `feature-employees`, `feature-details`, and `feature-analytics`
+  - `feature-employees` also provides the employee workspace layout, header, sidebar, and About page
 - `packages/auth/data` and `feature-auth` (including authentication and admin guards)
 - `packages/access-management/feature`
 - `packages/settings/data-theme` and `feature-help`
 
-The app owns its routes, shell, About page, global styles, public files, and assets. Employee seed JSON remains app-owned and is supplied to employee data access through an injection token. Nx module-boundary lint rules enforce the library dependency directions.
+The app owns its root component, routes, global styles, public files, and assets. Employee seed JSON remains app-owned and is supplied to employee data access through an injection token. Nx module-boundary lint rules enforce the library dependency directions.
 
 Run the workspace-wide checks with:
 

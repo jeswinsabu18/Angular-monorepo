@@ -8,50 +8,77 @@
   "tags": ["scope:app"],
   "targets": {
     "build": {
-      "executor": "nx:run-commands",
+      "executor": "@angular/build:application",
       "cache": true,
       "outputs": ["{workspaceRoot}/dist/employee-management"],
       "dependsOn": ["^build"],
       "defaultConfiguration": "production",
+      "options": {
+        "browser": "apps/employee-management/src/main.ts",
+        "tsConfig": "apps/employee-management/tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/employee-management/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/employee-management/src/assets",
+            "output": "assets"
+          }
+        ],
+        "styles": ["apps/employee-management/src/styles.css"]
+      },
       "configurations": {
         "development": {
-          "command": "ng build employee-management --configuration=development"
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
         },
         "production": {
-          "command": "ng build employee-management --configuration=production"
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "1.6MB",
+              "maximumError": "2MB"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kB",
+              "maximumError": "8kB"
+            }
+          ],
+          "outputHashing": "all"
         }
-      },
-      "options": {
-        "command": "ng build employee-management"
       }
     },
     "serve": {
-      "executor": "nx:run-commands",
+      "executor": "@angular/build:dev-server",
       "continuous": true,
       "defaultConfiguration": "development",
+      "options": {
+        "port": 4200
+      },
       "configurations": {
         "development": {
-          "command": "ng serve employee-management --configuration=development"
+          "buildTarget": "employee-management:build:development"
         },
         "production": {
-          "command": "ng serve employee-management --configuration=production"
+          "buildTarget": "employee-management:build:production"
         }
-      },
-      "options": {
-        "command": "ng serve employee-management"
       }
     },
     "watch": {
       "executor": "nx:run-commands",
       "continuous": true,
       "options": {
-        "command": "ng build employee-management --watch --configuration=development"
+        "command": "nx build employee-management --watch --configuration=development"
       }
     },
     "test": {
-      "executor": "nx:run-commands",
+      "executor": "@angular/build:unit-test",
       "options": {
-        "command": "ng test employee-management"
+        "tsConfig": "apps/employee-management/tsconfig.spec.json"
       }
     }
   }

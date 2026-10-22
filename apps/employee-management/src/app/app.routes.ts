@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
 
 import { LoginComponent, SignupComponent, adminGuard, authGuard } from '@employee-management/auth-feature-auth';
-import { EmployeeComponent, EmployeeListComponent } from '@employee-management/employee-feature-employees';
+import {
+  AboutComponent,
+  EmployeeComponent,
+  EmployeeLayoutComponent,
+  EmployeeListComponent,
+} from '@employee-management/employee-feature-employees';
 import { EmployeeDetailsComponent } from '@employee-management/employee-feature-details';
 import { HelpComponent } from '@employee-management/settings-feature-help';
-import { EmployeeLayoutComponent } from './components/employee-layout/employee-layout.component';
-import { AboutComponent } from './components/about/about.component';
 
 export const routes: Routes = [
   {
