@@ -5,32 +5,32 @@
     "packageManager": "npm",
     "analytics": false
   },
-  "newProjectRoot": "projects",
+  "newProjectRoot": "apps",
   "projects": {
-    "angularproject": {
+    "employee-management": {
       "projectType": "application",
       "schematics": {},
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/employee-management",
+      "sourceRoot": "apps/employee-management/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "browser": "src/main.ts",
-            "tsConfig": "tsconfig.app.json",
+            "browser": "apps/employee-management/src/main.ts",
+            "tsConfig": "apps/employee-management/tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "apps/employee-management/public"
               },
               {
                 "glob": "**/*",
-                "input": "src/assets",
+                "input": "apps/employee-management/src/assets",
                 "output": "assets"
               }
             ],
-            "styles": ["src/styles.css"]
+            "styles": ["apps/employee-management/src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -60,16 +60,19 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angularproject:build:production"
+              "buildTarget": "employee-management:build:production"
             },
             "development": {
-              "buildTarget": "angularproject:build:development"
+              "buildTarget": "employee-management:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "apps/employee-management/tsconfig.spec.json"
+          }
         }
       }
     }

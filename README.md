@@ -1,59 +1,65 @@
-# Angularproject
+# Employee Management
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
+This Nx workspace contains a standalone Angular employee-management application and focused Nx libraries under `packages/`. Application behavior and the Angular major version are preserved.
 
 ## Development server
 
-To start a local development server, run:
+Start the application with Nx:
 
 ```bash
-ng serve
+npx nx serve employee-management
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
+The app is available at `http://localhost:4200/`.
 
 ## Building
 
-To build the project run:
+Build the application with its production configuration:
 
 ```bash
-ng build
+npx nx build employee-management
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Use `--configuration=development` for a development build.
 
 ## Running unit tests
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Run the Angular unit-test target through Nx:
 
 ```bash
-ng test
+npx nx test employee-management
 ```
 
-## Running end-to-end tests
+There are currently no `*.spec.ts` files. The test target and spec TypeScript configuration are retained.
 
-For end-to-end (e2e) testing, run:
+## Workspace projects
+
+List the Nx projects with:
 
 ```bash
-ng e2e
+npx nx show projects
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The application lives in `apps/employee-management`. Shared libraries are in `packages/shared/`:
 
-## Additional Resources
+- `models` — shared employee and table models
+- `shared-ui` — reusable standalone controls and page shell
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Feature and data-access libraries are grouped by domain:
+
+- `packages/employee/data`, `feature-employees`, `feature-details`, and `feature-analytics`
+- `packages/auth/data` and `feature-auth` (including authentication and admin guards)
+- `packages/access-management/feature`
+- `packages/settings/data-theme` and `feature-help`
+
+The app owns its routes, shell, About page, global styles, public files, and assets. Employee seed JSON remains app-owned and is supplied to employee data access through an injection token. Nx module-boundary lint rules enforce the library dependency directions.
+
+Run the workspace-wide checks with:
+
+```bash
+npx nx run-many -t build --all
+npx nx run-many -t lint --all
+npx nx run-many -t test --all
+```
+
+Libraries have Nx test targets, but the original workspace did not contain spec files, so the test command reports that no tests were found until tests are added.

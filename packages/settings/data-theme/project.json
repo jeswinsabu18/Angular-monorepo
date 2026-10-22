@@ -1,0 +1,36 @@
+{
+  "name": "settings-data-theme",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/settings/data-theme/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [
+    "scope:settings",
+    "type:data-access"
+  ],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "project": "packages/settings/data-theme/ng-package.json",
+        "tsConfig": "packages/settings/data-theme/tsconfig.lib.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/settings/data-theme/tsconfig.lib.prod.json"
+        },
+        "development": {}
+      }
+    },
+    "test": {
+      "executor": "@nx/angular:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
+  }
+}

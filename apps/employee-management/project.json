@@ -1,0 +1,58 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "employee-management",
+  "projectType": "application",
+  "root": "apps/employee-management",
+  "sourceRoot": "apps/employee-management/src",
+  "prefix": "app",
+  "tags": ["scope:app"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "outputs": ["{workspaceRoot}/dist/employee-management"],
+      "dependsOn": ["^build"],
+      "defaultConfiguration": "production",
+      "configurations": {
+        "development": {
+          "command": "ng build employee-management --configuration=development"
+        },
+        "production": {
+          "command": "ng build employee-management --configuration=production"
+        }
+      },
+      "options": {
+        "command": "ng build employee-management"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "continuous": true,
+      "defaultConfiguration": "development",
+      "configurations": {
+        "development": {
+          "command": "ng serve employee-management --configuration=development"
+        },
+        "production": {
+          "command": "ng serve employee-management --configuration=production"
+        }
+      },
+      "options": {
+        "command": "ng serve employee-management"
+      }
+    },
+    "watch": {
+      "executor": "nx:run-commands",
+      "continuous": true,
+      "options": {
+        "command": "ng build employee-management --watch --configuration=development"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ng test employee-management"
+      }
+    }
+  }
+}
