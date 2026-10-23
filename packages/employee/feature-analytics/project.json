@@ -4,16 +4,11 @@
   "sourceRoot": "packages/employee/feature-analytics/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:employee",
-    "type:feature"
-  ],
+  "tags": ["scope:employee", "type:feature"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "defaultConfiguration": "production",
       "options": {
         "project": "packages/employee/feature-analytics/ng-package.json",

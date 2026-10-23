@@ -1,6 +1,11 @@
 import { Routes } from '@angular/router';
 
-import { LoginComponent, SignupComponent, adminGuard, authGuard } from '@employee-management/auth-feature-auth';
+import {
+  LoginComponent,
+  SignupComponent,
+  adminGuard,
+  authGuard,
+} from '@employee-management/auth-feature-auth';
 import {
   AboutComponent,
   EmployeeComponent,
@@ -51,7 +56,9 @@ export const routes: Routes = [
       {
         path: 'analytics',
         loadComponent: () =>
-          import('@employee-management/employee-feature-analytics').then((m) => m.EmployeeAnalysisComponent),
+          import('@employee-management/employee-feature-analytics').then(
+            (m) => m.EmployeeAnalysisComponent,
+          ),
       },
       {
         path: 'help',

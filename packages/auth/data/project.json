@@ -4,16 +4,11 @@
   "sourceRoot": "packages/auth/data/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:auth",
-    "type:data-access"
-  ],
+  "tags": ["scope:auth", "type:data-access"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "defaultConfiguration": "production",
       "options": {
         "project": "packages/auth/data/ng-package.json",

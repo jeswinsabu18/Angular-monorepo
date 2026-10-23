@@ -4,16 +4,11 @@
   "sourceRoot": "packages/settings/feature-help/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:settings",
-    "type:feature"
-  ],
+  "tags": ["scope:settings", "type:feature"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "defaultConfiguration": "production",
       "options": {
         "project": "packages/settings/feature-help/ng-package.json",

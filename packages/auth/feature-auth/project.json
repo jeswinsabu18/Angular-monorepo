@@ -4,16 +4,11 @@
   "sourceRoot": "packages/auth/feature-auth/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:auth",
-    "type:feature"
-  ],
+  "tags": ["scope:auth", "type:feature"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "defaultConfiguration": "production",
       "options": {
         "project": "packages/auth/feature-auth/ng-package.json",

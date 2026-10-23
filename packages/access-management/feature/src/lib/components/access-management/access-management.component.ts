@@ -1,9 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  AuthService,
-  RegisteredUser,
-  UserPermissions,
-} from '@employee-management/auth-data';
+import { AuthService, RegisteredUser, UserPermissions } from '@employee-management/auth-data';
 import { PageShellComponent } from '@employee-management/shared-ui';
 import { CustomCheckboxComponent } from '@employee-management/shared-ui';
 

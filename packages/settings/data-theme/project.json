@@ -4,16 +4,11 @@
   "sourceRoot": "packages/settings/data-theme/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:settings",
-    "type:data-access"
-  ],
+  "tags": ["scope:settings", "type:data-access"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "defaultConfiguration": "production",
       "options": {
         "project": "packages/settings/data-theme/ng-package.json",

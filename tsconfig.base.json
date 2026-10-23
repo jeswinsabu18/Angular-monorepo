@@ -15,15 +15,9 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "paths": {
-      "@employee-management/shared-ui": [
-        "./packages/shared/shared-ui/src/index.ts"
-      ],
-      "@employee-management/shared-models": [
-        "./packages/shared/models/src/index.ts"
-      ],
-      "@employee-management/employee-data": [
-        "./packages/employee/data/src/index.ts"
-      ],
+      "@employee-management/shared-ui": ["./packages/shared/shared-ui/src/index.ts"],
+      "@employee-management/shared-models": ["./packages/shared/models/src/index.ts"],
+      "@employee-management/employee-data": ["./packages/employee/data/src/index.ts"],
       "@employee-management/employee-feature-employees": [
         "./packages/employee/feature-employees/src/index.ts"
       ],
@@ -33,18 +27,12 @@
       "@employee-management/employee-feature-analytics": [
         "./packages/employee/feature-analytics/src/index.ts"
       ],
-      "@employee-management/auth-data": [
-        "./packages/auth/data/src/index.ts"
-      ],
-      "@employee-management/auth-feature-auth": [
-        "./packages/auth/feature-auth/src/index.ts"
-      ],
+      "@employee-management/auth-data": ["./packages/auth/data/src/index.ts"],
+      "@employee-management/auth-feature-auth": ["./packages/auth/feature-auth/src/index.ts"],
       "@employee-management/access-management-feature": [
         "./packages/access-management/feature/src/index.ts"
       ],
-      "@employee-management/settings-data-theme": [
-        "./packages/settings/data-theme/src/index.ts"
-      ],
+      "@employee-management/settings-data-theme": ["./packages/settings/data-theme/src/index.ts"],
       "@employee-management/settings-feature-help": [
         "./packages/settings/feature-help/src/index.ts"
       ]

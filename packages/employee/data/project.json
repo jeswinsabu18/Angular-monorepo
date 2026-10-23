@@ -4,16 +4,11 @@
   "sourceRoot": "packages/employee/data/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:employee",
-    "type:data-access"
-  ],
+  "tags": ["scope:employee", "type:data-access"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "defaultConfiguration": "production",
       "options": {
         "project": "packages/employee/data/ng-package.json",

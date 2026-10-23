@@ -4,16 +4,11 @@
   "sourceRoot": "packages/access-management/feature/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:access-management",
-    "type:feature"
-  ],
+  "tags": ["scope:access-management", "type:feature"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "defaultConfiguration": "production",
       "options": {
         "project": "packages/access-management/feature/ng-package.json",

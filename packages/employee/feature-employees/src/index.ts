@@ -1,4 +1,3 @@
-
 export * from './lib/about/about.component';
 export * from './lib/delete-confirmation-modal/delete-confirmation-modal.component';
 export * from './lib/employee-component/employee-component.component';

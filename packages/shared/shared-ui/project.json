@@ -3,10 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "packages/shared/shared-ui/src",
-  "tags": [
-    "scope:shared",
-    "type:ui"
-  ],
+  "tags": ["scope:shared", "type:ui"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
