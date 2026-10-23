@@ -4,8 +4,7 @@ import type { EChartsCoreOption } from 'echarts/core';
 
 import { EmployeeService } from '@employee-management/employee-data';
 import { ThemeService } from '@employee-management/settings-data-theme';
-import { PageShellComponent } from '@employee-management/shared-ui';
-import { CustomChartComponent } from '../custom-chart/custom-chart.component';
+import { CustomChartComponent, PageShellComponent } from '@employee-management/shared-ui';
 
 interface AgeGroup {
   label: string;
